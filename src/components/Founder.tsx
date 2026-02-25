@@ -5,7 +5,7 @@ import { Award, BookOpen, Scale } from 'lucide-react';
 const credentials = [
   { icon: Scale, label: 'Dava Yönetimi & Stratejik Çözüm Uzmanı' },
   { icon: BookOpen, label: 'Hukuki Danışmanlık & Risk Analizi' },
-  { icon: Award, label: 'Arabuluculuk Sicil No: TR-AR-2024' },
+  { icon: Award, label: 'Arabuluculuk Sicil No: 28931' },
 ];
 
 export default function Founder() {
