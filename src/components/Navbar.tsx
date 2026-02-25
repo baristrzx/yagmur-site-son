@@ -5,9 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 const expertiseItems = [
   { label: 'Kurumsal Hukuk ve Stratejik Danışmanlık', href: '#expertise' },
   { label: 'Gayrimenkul ve Mülkiyet Yönetimi', href: '#expertise' },
-  { label: 'Arabuluculuk Merkezi', href: '#expertise', bold: true },
-  { label: 'Uluslararası Hukuki İşlemler', href: '#expertise' },
-  { label: 'Diğer (İş ve Sigorta Hukuku, Aile, Miras, Ceza, İdare)', href: '#expertise', muted: true },
+  { label: 'Sınır Ötesi İşlemler', href: '#expertise' },
+  { label: 'Diğer (Aile, Ceza, İdare Hukuku)', href: '#expertise', muted: true },
 ];
 
 export default function Navbar() {
