@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -8,8 +7,9 @@ import Founder from './components/Founder';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-import LoginPage from './components/portal/LoginPage';
+import AdminLoginPage from './components/admin/AdminLoginPage';
 import AdminDashboard from './components/admin/AdminDashboard';
+import ClientLoginPage from './components/portal/ClientLoginPage';
 import ClientDashboard from './components/portal/ClientDashboard';
 
 function Spinner() {
@@ -25,48 +25,27 @@ function AppContent() {
   const path = window.location.pathname;
 
   const isAdminPath = path.startsWith('/admin');
-  const isPanelPath = path.startsWith('/panel') || path.startsWith('/muvekkil-paneli');
-  const isLoginPath = path.startsWith('/giris') || path.startsWith('/login');
-  const isPortalPath = isAdminPath || isPanelPath || isLoginPath;
-
-  useEffect(() => {
-    if (loading) return;
-
-    if (user && profile) {
-      if (profile.role === 'admin' && !isAdminPath) {
-        window.history.replaceState(null, '', '/admin');
-        window.dispatchEvent(new PopStateEvent('popstate'));
-      } else if (profile.role === 'client' && !isPanelPath) {
-        window.history.replaceState(null, '', '/panel');
-        window.dispatchEvent(new PopStateEvent('popstate'));
-      }
-    }
-  }, [user, profile, loading]);
+  const isClientPath = path.startsWith('/client-panel');
 
   if (loading) return <Spinner />;
 
-  if (!user && isPortalPath) {
-    return <LoginPage />;
+  if (isAdminPath) {
+    if (!user) return <AdminLoginPage />;
+    if (!profile) return <Spinner />;
+    if (profile.role !== 'admin') return <AdminLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." />;
+    return <AdminDashboard />;
+  }
+
+  if (isClientPath) {
+    if (!user) return <ClientLoginPage />;
+    if (!profile) return <Spinner />;
+    if (profile.role !== 'client') return <ClientLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." />;
+    return <ClientDashboard />;
   }
 
   if (user && profile) {
-    if (profile.role === 'admin') {
-      return <AdminDashboard />;
-    }
-    if (profile.role === 'client') {
-      if (isAdminPath) {
-        return <LoginPage unauthorizedMessage="Bu sayfaya erişim yetkiniz yok." />;
-      }
-      return <ClientDashboard />;
-    }
-  }
-
-  if (user && !profile) {
-    return <Spinner />;
-  }
-
-  if (isPortalPath && !user) {
-    return <LoginPage />;
+    if (profile.role === 'admin') return <AdminDashboard />;
+    if (profile.role === 'client') return <ClientDashboard />;
   }
 
   return (
