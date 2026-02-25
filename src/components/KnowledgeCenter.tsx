@@ -24,8 +24,6 @@ export default function KnowledgeCenter() {
       });
   }, []);
 
-  if (!loading && posts.length === 0) return null;
-
   const featuredPost = posts[0];
   const otherPosts = posts.slice(1);
 
@@ -54,6 +52,21 @@ export default function KnowledgeCenter() {
           <div className="flex items-center justify-center h-48">
             <div className="w-8 h-8 border-2 border-navy-200 border-t-navy-800 rounded-full animate-spin" />
           </div>
+        ) : posts.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col items-center justify-center py-20 border border-dashed border-gray-200 rounded-2xl bg-gray-50/50"
+          >
+            <div className="w-16 h-16 rounded-2xl bg-navy-50 flex items-center justify-center mb-5">
+              <BookOpen size={28} className="text-navy-300" />
+            </div>
+            <p className="text-navy-700 font-serif text-xl font-semibold">Yakında Burada</p>
+            <p className="mt-2 text-gray-400 text-sm max-w-xs text-center leading-relaxed">
+              Hukuki makaleler ve içtihat analizleri çok yakında yayınlanacak.
+            </p>
+          </motion.div>
         ) : (
           <div className="space-y-8">
             {featuredPost && (
@@ -177,3 +190,4 @@ export default function KnowledgeCenter() {
     </section>
   );
 }
+
