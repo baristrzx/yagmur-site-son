@@ -1,5 +1,6 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import { Landmark, Building2, Globe2, Handshake, Briefcase, Heart, Shield, UserCheck, BookOpen } from 'lucide-react';
 
 const goldTriangle = [
@@ -49,6 +50,7 @@ const otherAreas = [
 export default function Expertise() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const [arabuluculukOpen, setArabuluculukOpen] = useState(false);
 
   return (
     <section id="expertise" className="py-28 bg-navy-800 relative overflow-hidden" ref={ref}>
@@ -141,10 +143,11 @@ export default function Expertise() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.9 }}
+          className="rounded-2xl overflow-hidden"
         >
-          <a
-            href="#contact"
-            className="flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6 rounded-2xl bg-gold-500 hover:bg-gold-400 transition-all duration-300 group hover:shadow-xl hover:shadow-gold-500/20 hover:-translate-y-0.5"
+          <button
+            onClick={() => setArabuluculukOpen(prev => !prev)}
+            className="w-full flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-6 bg-gold-500 hover:bg-gold-400 transition-all duration-300 group hover:shadow-xl hover:shadow-gold-500/20"
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-navy-800/20 flex items-center justify-center flex-shrink-0">
@@ -165,9 +168,36 @@ export default function Expertise() {
                   {tag}
                 </span>
               ))}
-              <span className="text-navy-800 font-bold text-lg group-hover:translate-x-1 transition-transform">→</span>
+              <ChevronDown
+                size={20}
+                className={`text-navy-800 transition-transform duration-300 ${arabuluculukOpen ? 'rotate-180' : ''}`}
+              />
             </div>
-          </a>
+          </button>
+
+          <AnimatePresence>
+            {arabuluculukOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="px-8 py-6 bg-gold-500/15 border border-gold-500/20 border-t-0 space-y-4">
+                  <p className="text-white/75 text-sm leading-relaxed font-sans">
+                    Arabuluculuk, yalnızca tarafları uzlaştırma yöntemi değil; uyuşmazlığın ekonomik, hukuki ve ilişkisel boyutlarının birlikte değerlendirildiği yapılandırılmış bir süreçtir.
+                  </p>
+                  <p className="text-white/75 text-sm leading-relaxed font-sans">
+                    ANKH Legal, arabuluculuk faaliyetlerini stratejik risk analizi ve dava perspektifi ile birlikte yürütür. Süreç, olası yargısal senaryolar dikkate alınarak tasarlanır; tarafların hukuki pozisyonu, müzakere gücü ve uzun vadeli etkiler birlikte değerlendirilir.
+                  </p>
+                  <p className="text-white/75 text-sm leading-relaxed font-sans">
+                    Amaç, geçici bir uzlaşma değil; dengeli ve sürdürülebilir bir çözüm üretmektir.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
