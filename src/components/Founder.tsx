@@ -15,21 +15,6 @@ export default function Founder() {
   return (
     <section id="founder" className="py-28 bg-gray-50" ref={ref}>
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-gold-600 text-xs font-semibold tracking-[0.25em] uppercase font-sans">
-            Kurucu
-          </span>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl font-bold text-navy-800 leading-tight">
-            Kurucu
-          </h2>
-          <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
-        </motion.div>
-
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
