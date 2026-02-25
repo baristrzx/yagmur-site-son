@@ -25,7 +25,7 @@ export default function Founder() {
             Kurucu
           </span>
           <h2 className="mt-4 font-serif text-4xl md:text-5xl font-bold text-navy-800 leading-tight">
-            Direkt Kurucu ile Çalışın
+            Kurucu
           </h2>
           <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
         </motion.div>
