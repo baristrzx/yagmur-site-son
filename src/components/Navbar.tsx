@@ -78,9 +78,7 @@ export default function Navbar() {
                         href={item.href}
                         onClick={() => setDropdownOpen(false)}
                         className={`block px-5 py-3 text-sm transition-colors duration-150 hover:bg-white/5 ${
-                          item.bold
-                            ? 'font-semibold text-gold-300 border-l-2 border-gold-500 hover:text-gold-200'
-                            : item.muted
+                          item.muted
                             ? 'text-white/40 italic text-xs hover:text-white/60'
                             : 'text-white/70 hover:text-gold-400'
                         }`}
@@ -93,6 +91,14 @@ export default function Navbar() {
               )}
             </AnimatePresence>
           </div>
+
+          <a
+            href="#arabuluculuk"
+            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+          >
+            Arabuluculuk
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
+          </a>
 
           <a
             href="#founder"
@@ -153,9 +159,7 @@ export default function Navbar() {
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
                     className={`block py-1.5 pl-3 text-sm transition-colors ${
-                      item.bold
-                        ? 'font-semibold text-gold-300'
-                        : item.muted
+                      item.muted
                         ? 'text-white/30 italic text-xs'
                         : 'text-white/60 hover:text-gold-400'
                     }`}
@@ -164,6 +168,14 @@ export default function Navbar() {
                   </a>
                 ))}
               </div>
+
+              <a
+                href="#arabuluculuk"
+                onClick={() => setMenuOpen(false)}
+                className="text-white/80 hover:text-gold-400 text-sm font-medium py-2.5 transition-colors border-b border-white/5"
+              >
+                Arabuluculuk
+              </a>
 
               <a
                 href="#founder"
