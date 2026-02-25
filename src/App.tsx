@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Expertise from './components/Expertise';
 import Founder from './components/Founder';
+import KnowledgeCenter from './components/KnowledgeCenter';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -56,6 +57,7 @@ function AppContent() {
         <About />
         <Expertise />
         <Founder />
+        <KnowledgeCenter />
         <Contact />
       </main>
       <Footer />
