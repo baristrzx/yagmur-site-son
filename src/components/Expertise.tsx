@@ -73,33 +73,26 @@ export default function Expertise() {
             UZMANLIKLAR
           </h2>
           <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
-          <p className="mt-5 text-gold-400/80 text-sm font-semibold tracking-widest uppercase font-sans">
-            Altın Üçgen &amp; Diğerleri
-          </p>
         </motion.div>
 
-        <div className="space-y-4 mb-14">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {goldTriangle.map((item, i) => (
             <motion.div
               key={item.label}
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15 * i }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-7 hover:bg-white/8 hover:border-gold-500/30 transition-all duration-300 group"
+              className="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/8 hover:border-gold-500/30 transition-all duration-300 group"
             >
-              <div className="flex items-start gap-5">
-                <div className="w-11 h-11 rounded-xl bg-gold-500/10 border border-gold-500/30 group-hover:bg-gold-500 group-hover:border-gold-500 flex items-center justify-center flex-shrink-0 transition-all duration-300">
-                  <item.icon size={20} className="text-gold-400 group-hover:text-navy-800 transition-colors duration-300" />
-                </div>
-                <div>
-                  <h3 className="font-serif text-lg font-bold text-white mb-2">
-                    <span className="text-gold-400 mr-1">{item.label}.</span> {item.title}
-                  </h3>
-                  <p className="text-white/60 text-sm leading-relaxed font-sans">
-                    "{item.desc}"
-                  </p>
-                </div>
+              <div className="w-9 h-9 rounded-lg bg-gold-500/10 border border-gold-500/30 group-hover:bg-gold-500 group-hover:border-gold-500 flex items-center justify-center mb-4 flex-shrink-0 transition-all duration-300">
+                <item.icon size={16} className="text-gold-400 group-hover:text-navy-800 transition-colors duration-300" />
               </div>
+              <h3 className="font-sans text-sm font-bold text-white mb-2">
+                {item.title}
+              </h3>
+              <p className="text-white/50 text-xs leading-relaxed font-sans">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -110,16 +103,6 @@ export default function Expertise() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mb-14"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-white/40 text-xs font-semibold tracking-[0.25em] uppercase font-sans flex-shrink-0">
-              D. Diğer Uzmanlık Alanları
-            </span>
-            <div className="flex-1 h-px bg-white/10" />
-          </div>
-          <p className="text-white/55 text-sm leading-relaxed font-sans mb-8 max-w-3xl">
-            "ANKH Legal, odaklandığı ana branşların yanı sıra, müvekkillerinin hayatın ve ticaretin akışı içinde karşılaşabileceği tüm hukuki süreçlerde aynı stratejik disiplinle hizmet vermektedir:"
-          </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {otherAreas.map((area, i) => (
               <motion.div
