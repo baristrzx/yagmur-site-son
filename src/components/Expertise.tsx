@@ -1,103 +1,54 @@
-import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Landmark, Building2, Globe2, ChevronDown, Handshake, Briefcase, Heart, BookOpen, Shield, UserCheck, FileText, Scale, Users, Home } from 'lucide-react';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Landmark, Building2, Globe2, Handshake, Briefcase, Heart, Shield, UserCheck, BookOpen } from 'lucide-react';
 
-const services = [
+const goldTriangle = [
   {
     icon: Landmark,
+    label: 'A',
     title: 'Kurumsal Hukuk ve Stratejik Danışmanlık',
-    desc: 'Şirket kuruluşu, sözleşme mimarisi ve önleyici hukuk mekanizmaları.',
+    desc: 'Şirketler ve girişimler için sadece uyuşmazlık yönetimi değil, uyuşmazlığı doğmadan engelleyen "Önleyici Hukuki Yapılandırma" sunuyoruz. Sözleşme mimarisinden ortaklık yapılarına, ticari alacak yönetiminden kurumsal risk analizine kadar iş dünyasının her aşamasında stratejik kalkanınız oluyoruz.',
   },
   {
     icon: Building2,
+    label: 'B',
     title: 'Gayrimenkul, İnşaat ve Mülkiyet Yönetimi',
-    desc: 'Yüksek ölçekli yatırımlar ve mülkiyet uyuşmazlıklarında tam kapsamlı koruma.',
+    desc: 'Taşınmaz ve mülkiyet ilişkileri, hatayı kabul etmeyecek kadar kritiktir. Paylı mülkiyet çözümleri, tapu iptal ve tescil davaları ile yatırım süreçlerinin hukuki analizi konularında, mülkiyet haklarınızı koruyan ve değer katan çözümler üretiyoruz.',
   },
   {
     icon: Globe2,
+    label: 'C',
     title: 'Uluslararası Hukuki İşlemler',
-    desc: 'Uluslararası sözleşmeler ve sınır aşan yatırım süreçlerinde yerel uzmanlık, küresel ağ.',
+    desc: 'Dünya küçülürken hukuk genişliyor. Yabancı unsurlu sözleşmeler, sınır aşan yatırımlar ve uluslararası uyuşmazlıklarda; yerel mevzuat hakimiyetimizi global ağımızla birleştirerek müvekkillerimizi küresel arenada temsil ediyoruz.',
   },
 ];
 
-const otherServices = [
-  { icon: Briefcase, label: 'İş ve Sigorta Hukuku' },
-  { icon: Heart, label: 'Aile Hukuku' },
-  { icon: BookOpen, label: 'Miras Hukuku' },
-  { icon: Shield, label: 'Ceza Hukuku' },
-  { icon: UserCheck, label: 'İdare Hukuku' },
-];
-
-const expertiseDropdowns = [
+const otherAreas = [
   {
-    id: 'kurumsal',
-    icon: Landmark,
-    title: 'Kurumsal Hukuk ve Stratejik Danışmanlık',
-    items: [
-      { icon: FileText, text: 'Şirket kuruluşu ve yapılandırması' },
-      { icon: Scale, text: 'Sözleşme mimarisi ve müzakere yönetimi' },
-      { icon: Shield, text: 'Önleyici hukuk mekanizmaları' },
-      { icon: Briefcase, text: 'Kurumsal yönetim ve uyum danışmanlığı' },
-      { icon: Users, text: 'Birleşme ve devralmalar (M&A)' },
-    ],
+    icon: Briefcase,
+    title: 'İş ve Sigorta Hukuku',
+    desc: 'İş ilişkilerinin yönetiminden (sözleşme ve fesih süreçleri) sigorta uyuşmazlıklarına ve tazminat yönetimini kapsayan süreçlerde dava, arabuluculuk ve önleyici danışmanlık hizmetleri sunuyoruz.',
   },
   {
-    id: 'gayrimenkul',
-    icon: Building2,
-    title: 'Gayrimenkul ve Mülkiyet Yönetimi',
-    items: [
-      { icon: Home, text: 'Taşınmaz alım-satım ve devir işlemleri' },
-      { icon: FileText, text: 'Kira sözleşmeleri ve uyuşmazlıkları' },
-      { icon: Scale, text: 'İnşaat sözleşmeleri ve proje hukuku' },
-      { icon: Shield, text: 'Mülkiyet uyuşmazlıklarında tam koruma' },
-      { icon: Building2, text: 'Yüksek ölçekli yatırım danışmanlığı' },
-    ],
+    icon: Heart,
+    title: 'Aile ve Miras Hukuku',
+    desc: 'Aile içi ve miras ilişkilerinde, sadece uyuşmazlık çözümü değil; vasiyetname ve miras sözleşmeleri ile "Aile İçi Malvarlığı Planlaması" gibi geleceği koruyan hukuki adımlar atıyoruz.',
   },
   {
-    id: 'global',
-    icon: Globe2,
-    title: 'Sınır Ötesi İşlemler (Global)',
-    items: [
-      { icon: Globe2, text: 'Uluslararası sözleşme hukuku' },
-      { icon: Briefcase, text: 'Sınır aşan yatırım ve finansman yapıları' },
-      { icon: FileText, text: 'Çok taraflı ticari anlaşmalar' },
-      { icon: Scale, text: 'Uluslararası tahkim ve uyuşmazlık çözümü' },
-      { icon: Users, text: 'Yabancı yatırımcı danışmanlığı' },
-    ],
-  },
-  {
-    id: 'diger',
     icon: Shield,
-    title: 'Diğer (Aile, Ceza, İdare Hukukları)',
-    items: [
-      { icon: Heart, text: 'Aile hukuku ve boşanma süreçleri' },
-      { icon: Shield, text: 'Ceza hukuku ve savunma stratejileri' },
-      { icon: UserCheck, text: 'İdare hukuku ve kamu uyuşmazlıkları' },
-      { icon: BookOpen, text: 'Miras hukuku ve veraset işlemleri' },
-      { icon: Briefcase, text: 'İş ve sigorta hukuku' },
-    ],
+    title: 'Ceza Hukuku',
+    desc: 'Soruşturma ve kovuşturma aşamalarında, delil ve usul stratejisini en başından kurgulayarak, müvekkillerimiz için yüksek nitelikli ve stratejik bir savunma hattı oluşturuyoruz.',
+  },
+  {
+    icon: UserCheck,
+    title: 'İdari ve Düzenleyici Süreçler',
+    desc: 'Kamu otoriteleriyle olan ilişkilerde, idari yaptırımlara ve para cezalarına karşı iptal davaları ile ruhsat ve izin süreçlerinin takibinde tam hukuki destek sağlıyoruz.',
   },
 ];
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.2 } },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' } },
-};
 
 export default function Expertise() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-  const [otherOpen, setOtherOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-
-  const toggleDropdown = (id: string) => {
-    setOpenDropdown(prev => prev === id ? null : id);
-  };
 
   return (
     <section id="expertise" className="py-28 bg-navy-800 relative overflow-hidden" ref={ref}>
@@ -117,105 +68,79 @@ export default function Expertise() {
             Uzmanlık Alanlarımız
           </span>
           <h2 className="mt-4 font-serif text-4xl md:text-5xl font-bold text-white leading-tight">
-            Hukuki Çözüm Ortaklığı
+            UZMANLIKLAR
           </h2>
           <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
-          <p className="mt-6 text-white/60 max-w-2xl mx-auto text-[1.05rem] leading-relaxed font-sans">
-            ANKH Legal, uyuşmazlıkları dava, müzakere ve arabuluculuk mekanizmalarını entegre
-            biçimde değerlendirerek yönetir. Stratejik yaklaşım; sürecin hangi yöntemle
-            yürütüleceğine değil, en doğru sonucun hangi yöntemle elde edileceğine odaklanır.
+          <p className="mt-5 text-gold-400/80 text-sm font-semibold tracking-widest uppercase font-sans">
+            Altın Üçgen &amp; Diğerleri
           </p>
         </motion.div>
+
+        <div className="space-y-4 mb-14">
+          {goldTriangle.map((item, i) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, x: -30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.15 * i }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-7 hover:bg-white/8 hover:border-gold-500/30 transition-all duration-300 group"
+            >
+              <div className="flex items-start gap-5">
+                <div className="w-11 h-11 rounded-xl bg-gold-500/10 border border-gold-500/30 group-hover:bg-gold-500 group-hover:border-gold-500 flex items-center justify-center flex-shrink-0 transition-all duration-300">
+                  <item.icon size={20} className="text-gold-400 group-hover:text-navy-800 transition-colors duration-300" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-lg font-bold text-white mb-2">
+                    <span className="text-gold-400 mr-1">{item.label}.</span> {item.title}
+                  </h3>
+                  <p className="text-white/60 text-sm leading-relaxed font-sans">
+                    "{item.desc}"
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="mb-14"
         >
-          <div className="text-center mb-6">
-            <span className="text-white/35 text-[10px] font-semibold tracking-[0.3em] uppercase font-sans">Uzmanlıklar</span>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-px bg-white/10" />
+            <span className="text-white/40 text-xs font-semibold tracking-[0.25em] uppercase font-sans flex-shrink-0">
+              D. Diğer Uzmanlık Alanları
+            </span>
+            <div className="flex-1 h-px bg-white/10" />
           </div>
-          <div className="space-y-2">
-            {expertiseDropdowns.map((item) => (
-              <div key={item.id} className="rounded-xl border border-white/10 overflow-hidden">
-                <button
-                  onClick={() => toggleDropdown(item.id)}
-                  className="w-full flex items-center justify-between px-6 py-4 bg-white/5 hover:bg-white/8 transition-all duration-200 group"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 ${openDropdown === item.id ? 'bg-gold-500' : 'bg-gold-500/10 border border-gold-500/25 group-hover:bg-gold-500/20'}`}>
-                      <item.icon size={16} className={`transition-colors duration-300 ${openDropdown === item.id ? 'text-navy-800' : 'text-gold-400'}`} />
-                    </div>
-                    <span className={`font-sans text-sm font-semibold tracking-wide transition-colors duration-200 ${openDropdown === item.id ? 'text-white' : 'text-white/65 group-hover:text-white/90'}`}>
-                      {item.title}
-                    </span>
-                  </div>
-                  <ChevronDown
-                    size={16}
-                    className={`flex-shrink-0 transition-all duration-300 ${openDropdown === item.id ? 'rotate-180 text-gold-400' : 'text-white/30 group-hover:text-white/50'}`}
-                  />
-                </button>
-
-                <AnimatePresence>
-                  {openDropdown === item.id && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-4 pt-2 border-t border-white/8 bg-white/3">
-                        <div className="grid sm:grid-cols-2 gap-2 mt-2">
-                          {item.items.map((subItem, idx) => (
-                            <div
-                              key={idx}
-                              className="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-white/5 transition-colors duration-150 group/sub"
-                            >
-                              <div className="w-1.5 h-1.5 rounded-full bg-gold-500/50 group-hover/sub:bg-gold-400 flex-shrink-0 transition-colors" />
-                              <span className="text-white/55 group-hover/sub:text-white/80 text-sm font-sans transition-colors">
-                                {subItem.text}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+          <p className="text-white/55 text-sm leading-relaxed font-sans mb-8 max-w-3xl">
+            "ANKH Legal, odaklandığı ana branşların yanı sıra, müvekkillerinin hayatın ve ticaretin akışı içinde karşılaşabileceği tüm hukuki süreçlerde aynı stratejik disiplinle hizmet vermektedir:"
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {otherAreas.map((area, i) => (
+              <motion.div
+                key={area.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
+                className="rounded-xl border border-white/10 bg-white/4 p-5 hover:border-gold-500/30 hover:bg-white/8 transition-all duration-300 group"
+              >
+                <div className="w-9 h-9 rounded-lg bg-gold-500/10 border border-gold-500/20 group-hover:bg-gold-500/20 flex items-center justify-center mb-4 transition-all duration-300">
+                  <area.icon size={16} className="text-gold-400" />
+                </div>
+                <h4 className="font-sans text-sm font-bold text-white mb-2">{area.title}</h4>
+                <p className="text-white/50 text-xs leading-relaxed font-sans">{area.desc}</p>
+              </motion.div>
             ))}
           </div>
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-3 gap-8"
-        >
-          {services.map((s) => (
-            <motion.div
-              key={s.title}
-              variants={cardVariants}
-              className="relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-gold-500/40 transition-all duration-300 group"
-            >
-              <div className="w-14 h-14 rounded-xl bg-gold-500/10 group-hover:bg-gold-500 border border-gold-500/30 group-hover:border-gold-500 flex items-center justify-center mb-6 transition-all duration-300">
-                <s.icon size={26} className="text-gold-400 group-hover:text-navy-800 transition-colors duration-300" />
-              </div>
-              <h3 className="font-serif text-xl font-semibold text-white mb-3">{s.title}</h3>
-              <p className="text-white/60 text-sm leading-relaxed font-sans">{s.desc}</p>
-              <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="mt-10"
+          transition={{ duration: 0.7, delay: 0.9 }}
         >
           <a
             href="#contact"
@@ -243,50 +168,6 @@ export default function Expertise() {
               <span className="text-navy-800 font-bold text-lg group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.7 }}
-          className="mt-4"
-        >
-          <button
-            onClick={() => setOtherOpen(!otherOpen)}
-            className="w-full flex items-center justify-between px-8 py-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 hover:border-white/20 transition-all duration-300 group"
-          >
-            <span className="text-white/70 text-sm font-semibold tracking-wide font-sans group-hover:text-white/90 transition-colors">
-              Diğer Uzmanlık Alanlarımız
-            </span>
-            <ChevronDown
-              size={18}
-              className={`text-white/40 group-hover:text-gold-400 transition-all duration-300 ${otherOpen ? 'rotate-180' : ''}`}
-            />
-          </button>
-
-          <AnimatePresence>
-            {otherOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-3">
-                  {otherServices.map((s) => (
-                    <div
-                      key={s.label}
-                      className="flex items-center gap-3 px-5 py-4 rounded-xl border border-white/8 bg-white/3 hover:border-gold-500/30 hover:bg-white/8 transition-all duration-200 group cursor-default"
-                    >
-                      <s.icon size={16} className="text-gold-400/60 group-hover:text-gold-400 transition-colors flex-shrink-0" />
-                      <span className="text-white/50 group-hover:text-white/80 text-sm font-sans transition-colors">{s.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.div>
       </div>
     </section>
