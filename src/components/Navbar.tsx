@@ -112,7 +112,7 @@ export default function Navbar() {
           </a>
 
           <a
-            href="/portal"
+            href="/giris"
             className="text-white/60 hover:text-white/90 text-sm font-medium tracking-wide transition-colors duration-200 border border-white/20 hover:border-white/40 px-4 py-1.5 rounded"
           >
             Müvekkil Girişi
@@ -181,7 +181,7 @@ export default function Navbar() {
                 İletişim
               </a>
               <a
-                href="/portal"
+                href="/giris"
                 onClick={() => setMenuOpen(false)}
                 className="mt-3 px-5 py-2.5 border border-white/20 text-white/70 text-sm font-medium rounded text-center"
               >
