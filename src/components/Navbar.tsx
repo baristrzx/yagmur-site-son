@@ -120,13 +120,7 @@ export default function Navbar() {
             href="/client-panel"
             className="text-white/60 hover:text-white/90 text-sm font-medium tracking-wide transition-colors duration-200 border border-white/20 hover:border-white/40 px-4 py-1.5 rounded"
           >
-            Müvekkil Girişi
-          </a>
-          <a
-            href="#contact"
-            className="ml-2 px-5 py-2 bg-gold-500 hover:bg-gold-400 text-navy-800 text-sm font-semibold rounded transition-colors duration-200"
-          >
-            Bize Ulaşın
+            Müvekkil Paneli
           </a>
         </nav>
 
@@ -196,14 +190,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className="mt-3 px-5 py-2.5 border border-white/20 text-white/70 text-sm font-medium rounded text-center"
               >
-                Müvekkil Girişi
-              </a>
-              <a
-                href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 px-5 py-2.5 bg-gold-500 text-navy-800 text-sm font-semibold rounded text-center"
-              >
-                Bize Ulaşın
+                Müvekkil Paneli
               </a>
             </div>
           </motion.div>
