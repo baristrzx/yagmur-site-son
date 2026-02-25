@@ -46,8 +46,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="font-sans text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          ANKH Legal, hukuki süreçleri risk analizi ve uzun vadeli güvenlik
-          perspektifiyle yönetir.
+          Karmaşık hukuki süreçlerde, bireyler ve şirketler için dava yönetimi,
+          hukuki danışmanlık ve stratejik temsil.
         </motion.p>
 
         <motion.div
