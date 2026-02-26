@@ -24,7 +24,7 @@ export default function Founder() {
           >
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto">
               <img
-                src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="/WhatsApp_Image_2026-02-26_at_14.25.27.jpeg"
                 alt="Av. Yağmur Koçak Arat"
                 className="w-full h-full object-cover"
               />
