@@ -50,7 +50,7 @@ export default function ClientsPanel() {
       });
 
       const result = await res.json();
-      if (!res.ok) throw new Error(result.error || 'Kullanıcı oluşturulamadı');
+      if (!res.ok) throw new Error(result.error || result.message || `Hata (${res.status}): Kullanıcı oluşturulamadı`);
 
       showToast('success', 'Müvekkil başarıyla oluşturuldu.');
       setFormData({ email: '', password: '', full_name: '' });

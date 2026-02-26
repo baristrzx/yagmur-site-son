@@ -19,8 +19,18 @@ Deno.serve(async (req: Request) => {
 
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      return new Response(JSON.stringify({ error: "Yetkisiz erişim" }), {
         status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const body = await req.json();
+    const { email, password, full_name } = body;
+
+    if (!email || !password || !full_name) {
+      return new Response(JSON.stringify({ error: "E-posta, şifre ve ad soyad zorunludur" }), {
+        status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -31,7 +41,7 @@ Deno.serve(async (req: Request) => {
 
     const { data: { user }, error: userError } = await callerClient.auth.getUser();
     if (userError || !user) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      return new Response(JSON.stringify({ error: "Oturum doğrulanamadı: " + (userError?.message || "bilinmeyen hata") }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -41,20 +51,25 @@ Deno.serve(async (req: Request) => {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
-    const { data: callerProfile } = await adminClient
+    const { data: callerProfile, error: profileReadError } = await adminClient
       .from("profiles")
       .select("role")
       .eq("id", user.id)
       .maybeSingle();
 
-    if (!callerProfile || callerProfile.role !== "admin") {
-      return new Response(JSON.stringify({ error: "Forbidden: admin only" }), {
-        status: 403,
+    if (profileReadError) {
+      return new Response(JSON.stringify({ error: "Profil okunamadı: " + profileReadError.message }), {
+        status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const { email, password, full_name } = await req.json();
+    if (!callerProfile || callerProfile.role !== "admin") {
+      return new Response(JSON.stringify({ error: "Bu işlem için admin yetkisi gereklidir" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     const { data: newUser, error: createError } = await adminClient.auth.admin.createUser({
       email,
@@ -70,25 +85,32 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const { error: profileError } = await adminClient.from("profiles").upsert({
-      id: newUser.user.id,
-      email,
-      full_name,
-      role: "client",
-    });
+    const { error: profileError } = await adminClient
+      .from("profiles")
+      .update({ full_name, role: "client" })
+      .eq("id", newUser.user.id);
 
     if (profileError) {
-      return new Response(JSON.stringify({ error: profileError.message }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      const { error: insertError } = await adminClient.from("profiles").insert({
+        id: newUser.user.id,
+        email,
+        full_name,
+        role: "client",
       });
+
+      if (insertError) {
+        return new Response(JSON.stringify({ error: "Profil kaydedilemedi: " + insertError.message }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
     }
 
     return new Response(JSON.stringify({ success: true, user: newUser.user }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), {
+    return new Response(JSON.stringify({ error: "Sunucu hatası: " + String(err) }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
