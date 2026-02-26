@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { X } from 'lucide-react';
+import { X, MessageSquare } from 'lucide-react';
 import { supabase, type Case, type Profile } from '../../lib/supabase';
 
 type Props = {
@@ -39,6 +39,7 @@ export default function CaseFormModal({ editingCase, onClose, onSaved }: Props) 
     hearing_date: editingCase?.hearing_date || '',
     current_stage: editingCase?.current_stage || '',
     execution_status: editingCase?.execution_status || '',
+    lawyer_notes: editingCase?.lawyer_notes || '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -62,6 +63,7 @@ export default function CaseFormModal({ editingCase, onClose, onSaved }: Props) 
           hearing_date: formData.hearing_date || null,
           current_stage: formData.current_stage,
           execution_status: formData.execution_status,
+          lawyer_notes: formData.lawyer_notes,
         }).eq('id', editingCase.id);
         if (error) throw error;
         onSaved(formData.current_stage !== prevStage ? prevStage : undefined);
@@ -73,6 +75,7 @@ export default function CaseFormModal({ editingCase, onClose, onSaved }: Props) 
           hearing_date: formData.hearing_date || null,
           current_stage: formData.current_stage,
           execution_status: formData.execution_status,
+          lawyer_notes: formData.lawyer_notes,
         });
         if (error) throw error;
         onSaved();
@@ -177,6 +180,21 @@ export default function CaseFormModal({ editingCase, onClose, onSaved }: Props) 
               <option value="">Durum seçin...</option>
               {EXECUTION_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
+          </div>
+
+          <div className="border-t border-gray-100 pt-4">
+            <div className="flex items-center gap-2 mb-3">
+              <MessageSquare className="w-4 h-4 text-navy-600" />
+              <span className="text-gray-600 text-xs uppercase tracking-widest font-medium">Müvekkil Bilgilendirme Notu</span>
+            </div>
+            <p className="text-xs text-gray-400 mb-3">Bu alan müvekkile gösterilecektir. Dava hakkında bilgilendirici notlar ekleyebilirsiniz.</p>
+            <textarea
+              value={formData.lawyer_notes}
+              onChange={e => setFormData(p => ({ ...p, lawyer_notes: e.target.value }))}
+              rows={5}
+              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-navy-400 focus:ring-1 focus:ring-navy-200 transition-colors resize-none"
+              placeholder="Örn: Bu hafta duruşma gerçekleşti. Mahkeme bilirkişi raporu için ek süre verdi. Bir sonraki duruşma tarihini takip ediniz."
+            />
           </div>
 
           <div className="flex gap-3 justify-end pt-2">

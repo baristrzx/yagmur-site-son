@@ -516,6 +516,22 @@ function OverviewTab({ case: c, style }: { case: Case; style: ReturnType<typeof 
           </div>
         ))}
       </div>
+      {c.lawyer_notes && (
+        <div className="bg-white border border-navy-100 rounded-2xl p-5 shadow-sm">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-8 h-8 bg-navy-50 rounded-xl flex items-center justify-center shrink-0">
+              <MessageSquare className="w-4 h-4 text-navy-600" />
+            </div>
+            <div>
+              <p className="text-navy-800 text-sm font-semibold">Avukat Notu</p>
+              <p className="text-gray-400 text-xs">Avukatınızın size iletmek istediği bilgiler</p>
+            </div>
+          </div>
+          <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap pl-10">
+            {c.lawyer_notes}
+          </p>
+        </div>
+      )}
       <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
         <div className="flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />

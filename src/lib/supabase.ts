@@ -22,6 +22,7 @@ export type Case = {
   hearing_date: string | null;
   current_stage: string;
   execution_status: string;
+  lawyer_notes: string;
   last_updated: string;
   created_at: string;
 };
