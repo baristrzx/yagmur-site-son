@@ -25,8 +25,11 @@ export default function Founder() {
               Kurucu Avukat & Arabulucu
             </span>
             <h3 className="mt-3 font-serif text-3xl md:text-4xl font-bold text-navy-800 leading-tight">
-              Av. Yağmur Koçak Arat
+              Av. Arb. Yağmur Koçak Arat
             </h3>
+            <p className="mt-1 text-gold-600 font-sans text-sm font-medium tracking-wide">
+              Kurucu Avukat | Arabulucu
+            </p>
             <div className="mt-2 w-12 h-1 bg-gold-500 rounded-full" />
           </div>
 
@@ -35,13 +38,13 @@ export default function Founder() {
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <img
                   src="/WhatsApp_Image_2026-02-26_at_14.25.27.jpeg"
-                  alt="Av. Arb. Yağmur Koçak"
+                  alt="Av. Arb. Yağmur Koçak Arat"
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3">
-                    <p className="font-serif text-white text-sm font-semibold">Av. Yağmur Koçak Arat</p>
+                    <p className="font-serif text-white text-sm font-semibold">Av. Arb. Yağmur Koçak Arat</p>
                     <p className="text-gold-300 text-[10px] font-sans font-medium tracking-wide mt-0.5">
                       Kurucu Avukat | Arabulucu
                     </p>
@@ -50,17 +53,17 @@ export default function Founder() {
               </div>
             </div>
 
-            <p className="text-gray-600 leading-relaxed font-sans text-[1.03rem]">
-              Av. Yağmur Koçak Arat, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
+            <p className="text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
+              Av. Arb. Yağmur Koçak Arat, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
               uzmanlaşmış bir hukukçudur.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem]">
+            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
               Çalışma modeli; yargısal süreci, müzakere dinamiklerini ve arabuluculuk
               mekanizmalarını birlikte değerlendiren bütüncül bir yaklaşıma dayanır. Her
               uyuşmazlık, dava perspektifi ile analiz edilir; çözüm yolu ise dosyanın niteliğine
               göre belirlenir.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem]">
+            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
               Ticari, sigorta ve iş hukuku kaynaklı ihtilaflarda hem temsil hem arabuluculuk
               faaliyetleri yürütmekte; hukuki risk ile ekonomik sonuç arasındaki dengeyi esas
               almaktadır.
@@ -70,7 +73,7 @@ export default function Founder() {
               müzakerede stratejik ve hesaplı,<br />
               arabuluculukta ise çözüm odaklıdır.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem]">
+            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
               ANKH Legal'i, yalnızca uyuşmazlık takip eden değil; uyuşmazlığı yöneten bir hukuk
               anlayışı üzerine kurmuştur.
             </p>
