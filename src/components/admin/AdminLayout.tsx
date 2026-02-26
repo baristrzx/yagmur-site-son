@@ -177,8 +177,10 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
       <div className="w-64 bg-[#0d1b2a] flex flex-col h-full min-h-screen">
         <div className="p-5 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <img src="/image.png" alt="ANKH Legal" className="h-10 w-auto object-contain" />
-            <span className="text-amber-400 text-xs font-semibold tracking-widest uppercase">Admin</span>
+            <a href="/" className="flex items-center gap-3 group">
+              <img src="/image.png" alt="ANKH Legal" className="h-10 w-auto object-contain group-hover:opacity-80 transition-opacity" />
+              <span className="text-amber-400 text-xs font-semibold tracking-widest uppercase group-hover:text-amber-300 transition-colors">Admin</span>
+            </a>
           </div>
         </div>
 
