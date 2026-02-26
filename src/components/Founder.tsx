@@ -25,13 +25,13 @@ export default function Founder() {
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto">
               <img
                 src="/WhatsApp_Image_2026-02-26_at_14.25.27.jpeg"
-                alt="Av. Yağmur Koçak Arat"
+                alt="Av. Arb. Yağmur Koçak"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-5 py-4">
-                  <p className="font-serif text-white text-xl font-semibold">Av. Yağmur Koçak Arat</p>
+                  <p className="font-serif text-white text-xl font-semibold">Av. Arb. Yağmur Koçak</p>
                   <p className="text-gold-300 text-xs font-sans font-medium tracking-wide mt-1">
                     Kurucu Avukat | Arabulucu
                   </p>
@@ -51,12 +51,12 @@ export default function Founder() {
               Kurucu Avukat & Arabulucu
             </span>
             <h3 className="mt-3 font-serif text-3xl md:text-4xl font-bold text-navy-800 leading-tight">
-              Av. Yağmur Koçak Arat
+              Av. Arb. Yağmur Koçak
             </h3>
             <div className="mt-2 w-12 h-1 bg-gold-500 rounded-full" />
 
             <p className="mt-6 text-gray-600 leading-relaxed font-sans text-[1.03rem]">
-              Av. Yağmur Koçak Arat, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
+              Av. Arb. Yağmur Koçak, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
               uzmanlaşmış bir hukukçudur.
             </p>
             <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem]">

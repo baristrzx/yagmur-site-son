@@ -68,7 +68,7 @@ export default function Footer() {
             © {new Date().getFullYear()} ANKH Legal. Tüm hakları saklıdır.
           </p>
           <p className="text-white/30 text-xs font-sans">
-            Av. Yağmur Koçak Arat | Baro Sicil No: —
+            Av. Arb. Yağmur Koçak | Baro Sicil No: —
           </p>
         </div>
       </div>
