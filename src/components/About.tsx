@@ -53,21 +53,21 @@ export default function About() {
             </h2>
             <div className="mt-2 w-16 h-1 bg-gold-500 rounded-full" />
 
-            <p className="mt-8 text-gray-600 leading-relaxed text-[1.05rem] font-sans">
+            <p className="mt-8 text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
               ANKH Legal, stratejik dava yönetimi ve yüksek nitelikli hukuki danışmanlık sunmak
               amacıyla kurulmuş bir hukuk ofisidir.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans">
+            <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
               Hukuki meseleleri yalnızca yargısal süreçler olarak değil; risk analizi, güç dengesi
               ve uzun vadeli hukuki güvenlik perspektifiyle ele alır. Her dosya, kapsamlı bir ön
               değerlendirmeye tabi tutulur; sürecin başında net bir yol haritası oluşturulur ve
               temsil buna göre yapılandırılır.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans">
+            <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
               Yaklaşımımız reaktif değil, öngörülüdür. Amaç yalnızca bir uyuşmazlığı
               sonuçlandırmak değil; müvekkilin hukuki pozisyonunu güçlendirmektir.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans">
+            <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
               ANKH Legal, bireyler, aile işletmeleri ve şirketler için karmaşık hukuki süreçleri
               sistemli, disiplinli ve sonuç odaklı bir anlayışla yönetir. Türkiye merkezli olmakla
               birlikte uluslararası bağlantılı hukuki işlemler ve yabancı müvekkillerle çalışma
