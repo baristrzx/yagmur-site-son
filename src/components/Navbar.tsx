@@ -40,7 +40,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <a href="#" className="flex items-center group">
           <img
-            src="/image.png"
+            src="/Ekran_Resmi_2026-02-26_21.00.58.png"
             alt="ANKH Legal"
             className="h-14 w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
           />
