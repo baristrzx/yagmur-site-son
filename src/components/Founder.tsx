@@ -25,7 +25,7 @@ export default function Founder() {
               Kurucu Avukat & Arabulucu
             </span>
             <h3 className="mt-3 font-serif text-3xl md:text-4xl font-bold text-navy-800 leading-tight">
-              Av. Arb. Yağmur Koçak
+              Av. Yağmur Koçak Arat
             </h3>
             <div className="mt-2 w-12 h-1 bg-gold-500 rounded-full" />
           </div>
@@ -41,7 +41,7 @@ export default function Founder() {
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3">
-                    <p className="font-serif text-white text-sm font-semibold">Av. Arb. Yağmur Koçak</p>
+                    <p className="font-serif text-white text-sm font-semibold">Av. Yağmur Koçak Arat</p>
                     <p className="text-gold-300 text-[10px] font-sans font-medium tracking-wide mt-0.5">
                       Kurucu Avukat | Arabulucu
                     </p>
@@ -51,7 +51,7 @@ export default function Founder() {
             </div>
 
             <p className="text-gray-600 leading-relaxed font-sans text-[1.03rem]">
-              Av. Arb. Yağmur Koçak, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
+              Av. Yağmur Koçak Arat, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
               uzmanlaşmış bir hukukçudur.
             </p>
             <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem]">
@@ -66,7 +66,8 @@ export default function Founder() {
               almaktadır.
             </p>
             <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] italic border-l-2 border-gold-400 pl-4">
-              Dava süreçlerinde disiplinli ve kararlı, müzakerede stratejik ve hesaplı,
+              Dava süreçlerinde disiplinli ve kararlı,<br />
+              müzakerede stratejik ve hesaplı,<br />
               arabuluculukta ise çözüm odaklıdır.
             </p>
             <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem]">
