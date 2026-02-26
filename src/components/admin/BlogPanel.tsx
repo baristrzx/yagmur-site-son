@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Plus, Pencil, X, BookOpen, Eye, EyeOff, BarChart2 } from 'lucide-react';
 import { supabase, type BlogPost, type BlogCategory } from '../../lib/supabase';
+import RichTextEditor from './RichTextEditor';
 
 const EMPTY_POST = {
   category_id: '' as string | null,
@@ -147,9 +148,13 @@ export default function BlogPanel({ initialView = 'list' }: Props) {
             </div>
             <div>
               <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">İçerik ({lang.toUpperCase()})</label>
-              <textarea value={lang === 'tr' ? form.content_tr : form.content_en}
-                onChange={e => setForm(p => lang === 'tr' ? { ...p, content_tr: e.target.value } : { ...p, content_en: e.target.value })}
-                rows={18} className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 resize-y font-mono" />
+              <RichTextEditor
+                key={lang}
+                value={lang === 'tr' ? form.content_tr : form.content_en}
+                onChange={html => setForm(p => lang === 'tr' ? { ...p, content_tr: html } : { ...p, content_en: html })}
+                placeholder={`İçerik yazın (${lang.toUpperCase()})...`}
+                minHeight={400}
+              />
             </div>
             <div className="flex items-center gap-2 pt-1">
               <label className="flex items-center gap-2 cursor-pointer">
