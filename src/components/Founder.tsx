@@ -15,38 +15,13 @@ export default function Founder() {
   return (
     <section id="founder" className="py-28 bg-gray-50" ref={ref}>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto">
-              <img
-                src="/WhatsApp_Image_2026-02-26_at_14.25.27.jpeg"
-                alt="Av. Arb. Yağmur Koçak"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-5 py-4">
-                  <p className="font-serif text-white text-xl font-semibold">Av. Arb. Yağmur Koçak</p>
-                  <p className="text-gold-300 text-xs font-sans font-medium tracking-wide mt-1">
-                    Kurucu Avukat | Arabulucu
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -top-6 -left-6 w-48 h-48 rounded-full bg-gold-400/10 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-6 -right-6 w-48 h-48 rounded-full bg-navy-600/15 blur-3xl pointer-events-none" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="mb-8">
             <span className="text-gold-600 text-xs font-semibold tracking-[0.25em] uppercase font-sans">
               Kurucu Avukat & Arabulucu
             </span>
@@ -54,8 +29,29 @@ export default function Founder() {
               Av. Arb. Yağmur Koçak
             </h3>
             <div className="mt-2 w-12 h-1 bg-gold-500 rounded-full" />
+          </div>
 
-            <p className="mt-6 text-gray-600 leading-relaxed font-sans text-[1.03rem]">
+          <div className="clearfix">
+            <div className="float-left mr-8 mb-4 w-56 md:w-72 flex-shrink-0">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="/WhatsApp_Image_2026-02-26_at_14.25.27.jpeg"
+                  alt="Av. Arb. Yağmur Koçak"
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
+                  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3">
+                    <p className="font-serif text-white text-sm font-semibold">Av. Arb. Yağmur Koçak</p>
+                    <p className="text-gold-300 text-[10px] font-sans font-medium tracking-wide mt-0.5">
+                      Kurucu Avukat | Arabulucu
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-600 leading-relaxed font-sans text-[1.03rem]">
               Av. Arb. Yağmur Koçak, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
               uzmanlaşmış bir hukukçudur.
             </p>
@@ -78,27 +74,27 @@ export default function Founder() {
               ANKH Legal'i, yalnızca uyuşmazlık takip eden değil; uyuşmazlığı yöneten bir hukuk
               anlayışı üzerine kurmuştur.
             </p>
+          </div>
 
-            <div className="mt-8 flex flex-col gap-3">
-              {credentials.map((c) => (
-                <div key={c.label} className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center flex-shrink-0">
-                    <c.icon size={15} className="text-gold-400" />
-                  </div>
-                  <span className="text-gray-700 text-sm font-sans font-medium">{c.label}</span>
+          <div className="mt-8 flex flex-col gap-3">
+            {credentials.map((c) => (
+              <div key={c.label} className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center flex-shrink-0">
+                  <c.icon size={15} className="text-gold-400" />
                 </div>
-              ))}
-            </div>
+                <span className="text-gray-700 text-sm font-sans font-medium">{c.label}</span>
+              </div>
+            ))}
+          </div>
 
-            <a
-              href="#contact"
-              className="inline-flex items-center mt-8 px-7 py-3.5 bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold tracking-wide rounded transition-all duration-200 hover:shadow-lg hover:shadow-navy-800/30 hover:-translate-y-0.5"
-            >
-              Dosya Ön Değerlendirme Talebi
-              <span className="ml-2">→</span>
-            </a>
-          </motion.div>
-        </div>
+          <a
+            href="#contact"
+            className="inline-flex items-center mt-8 px-7 py-3.5 bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold tracking-wide rounded transition-all duration-200 hover:shadow-lg hover:shadow-navy-800/30 hover:-translate-y-0.5"
+          >
+            Dosya Ön Değerlendirme Talebi
+            <span className="ml-2">→</span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
