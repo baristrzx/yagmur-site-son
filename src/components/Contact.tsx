@@ -89,13 +89,12 @@ export default function Contact() {
           >
             <iframe
               title="ANKH Legal Konum"
-              src="https://maps.google.com/maps?q=Fo%C3%A7a+Mahallesi+983.+Sokak+No:18%2F2+Fethiye+Mu%C4%9Fla&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=29.0990%2C36.6490%2C29.1290%2C36.6690&layer=mapnik&marker=36.6590%2C29.1140"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: '420px' }}
               allowFullScreen
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
             />
             <div className="absolute bottom-4 left-4 right-4">
               <div className="bg-navy-800/95 backdrop-blur-sm rounded-xl px-5 py-4 border border-white/10">

@@ -24,17 +24,14 @@ export default function KnowledgeCenter() {
       });
   }, []);
 
-  const featuredPost = posts[0];
-  const otherPosts = posts.slice(1);
-
   return (
-    <section id="knowledge" className="py-28 bg-white" ref={ref}>
+    <section id="knowledge" className="py-24 bg-white" ref={ref}>
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <span className="text-gold-600 text-xs font-semibold tracking-[0.25em] uppercase font-sans">
             Hukuki İçgörü
@@ -68,126 +65,79 @@ export default function KnowledgeCenter() {
             </p>
           </motion.div>
         ) : (
-          <div className="space-y-8">
-            {featuredPost && (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {posts.map((post, i) => (
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                key={post.id}
+                initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="group grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500"
+                transition={{ duration: 0.6, delay: 0.15 + i * 0.08 }}
+                className="group rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white flex flex-col cursor-pointer"
               >
-                <div className="relative overflow-hidden bg-navy-900 min-h-[280px] lg:min-h-[360px]">
-                  {featuredPost.cover_image ? (
+                <div className="relative aspect-square overflow-hidden bg-navy-900">
+                  {post.cover_image ? (
                     <img
-                      src={featuredPost.cover_image}
-                      alt={featuredPost.title_tr}
-                      className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700 absolute inset-0"
+                      src={post.cover_image}
+                      alt={post.title_tr}
+                      className="w-full h-full object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-navy-800 to-navy-950" />
+                    <div className="w-full h-full bg-gradient-to-br from-navy-700 to-navy-950 flex items-center justify-center">
+                      <BookOpen size={36} className="text-white/15" />
+                    </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-r from-navy-900/40 to-navy-900/10" />
-                  <div className="absolute top-6 left-6">
-                    <span className="bg-gold-500 text-navy-900 text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">
-                      Öne Çıkan
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-8 lg:p-10 bg-white flex flex-col justify-center">
-                  {featuredPost.blog_categories && (
-                    <div className="flex items-center gap-2 mb-4">
-                      <Tag size={12} className="text-gold-500" />
-                      <span className="text-gold-600 text-xs font-semibold tracking-widest uppercase">
-                        {featuredPost.blog_categories.name_tr}
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
+                  {post.blog_categories && (
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-white/90 backdrop-blur-sm text-navy-800 text-[9px] font-bold tracking-[0.18em] uppercase px-2.5 py-1 rounded-full">
+                        {post.blog_categories.name_tr}
                       </span>
                     </div>
                   )}
-                  <h3 className="font-serif text-2xl lg:text-3xl font-bold text-navy-800 leading-tight group-hover:text-gold-700 transition-colors duration-200">
-                    {featuredPost.title_tr}
+                  {i === 0 && (
+                    <div className="absolute top-3 right-3">
+                      <span className="bg-gold-500 text-navy-900 text-[9px] font-bold tracking-[0.18em] uppercase px-2.5 py-1 rounded-full">
+                        Öne Çıkan
+                      </span>
+                    </div>
+                  )}
+                  {post.published_at && (
+                    <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white/70 text-[10px] font-sans">
+                      <Calendar size={10} />
+                      {new Date(post.published_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-5 flex flex-col flex-1">
+                  {post.blog_categories && (
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <Tag size={10} className="text-gold-500" />
+                      <span className="text-gold-600 text-[10px] font-semibold tracking-widest uppercase font-sans">
+                        {post.blog_categories.name_tr}
+                      </span>
+                    </div>
+                  )}
+                  <h3 className="font-serif text-base font-bold text-navy-800 leading-snug group-hover:text-gold-700 transition-colors duration-200 line-clamp-2 flex-1">
+                    {post.title_tr}
                   </h3>
-                  {featuredPost.excerpt_tr && (
-                    <p className="mt-4 text-gray-500 leading-relaxed text-sm line-clamp-3 font-sans">
-                      {featuredPost.excerpt_tr}
+                  {post.excerpt_tr && (
+                    <p className="mt-2 text-gray-500 text-xs leading-relaxed line-clamp-2 font-sans">
+                      {post.excerpt_tr}
                     </p>
                   )}
-                  <div className="mt-6 flex items-center justify-between">
-                    {featuredPost.published_at && (
-                      <div className="flex items-center gap-2 text-gray-400 text-xs font-sans">
-                        <Calendar size={13} />
-                        {new Date(featuredPost.published_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
-                      </div>
-                    )}
-                    <span className="inline-flex items-center gap-1.5 text-navy-700 hover:text-gold-600 text-sm font-semibold transition-colors duration-200 ml-auto cursor-pointer group/link">
-                      Devamını Oku
-                      <ArrowRight size={15} className="group-hover/link:translate-x-1 transition-transform duration-200" />
+                  <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-end">
+                    <span className="inline-flex items-center gap-1 text-gold-600 text-xs font-semibold group-hover:gap-2 transition-all duration-200">
+                      Oku
+                      <ArrowRight size={11} />
                     </span>
                   </div>
                 </div>
               </motion.div>
-            )}
-
-            {otherPosts.length > 0 && (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {otherPosts.map((post, i) => (
-                  <motion.div
-                    key={post.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-                    className="group rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-400 bg-white flex flex-col cursor-pointer"
-                  >
-                    <div className="relative h-48 overflow-hidden bg-navy-900">
-                      {post.cover_image ? (
-                        <img
-                          src={post.cover_image}
-                          alt={post.title_tr}
-                          className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-navy-700 to-navy-900 flex items-center justify-center">
-                          <BookOpen size={32} className="text-white/20" />
-                        </div>
-                      )}
-                      {post.blog_categories && (
-                        <div className="absolute top-4 left-4">
-                          <span className="bg-white/90 text-navy-800 text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1 rounded-full">
-                            {post.blog_categories.name_tr}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="font-serif text-lg font-bold text-navy-800 leading-snug group-hover:text-gold-700 transition-colors duration-200 line-clamp-2">
-                        {post.title_tr}
-                      </h3>
-                      {post.excerpt_tr && (
-                        <p className="mt-3 text-gray-500 text-sm leading-relaxed line-clamp-2 font-sans flex-1">
-                          {post.excerpt_tr}
-                        </p>
-                      )}
-                      <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
-                        {post.published_at && (
-                          <div className="flex items-center gap-1.5 text-gray-400 text-xs font-sans">
-                            <Calendar size={11} />
-                            {new Date(post.published_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' })}
-                          </div>
-                        )}
-                        <span className="inline-flex items-center gap-1 text-gold-600 text-xs font-semibold ml-auto group-hover:gap-2 transition-all duration-200">
-                          Oku
-                          <ArrowRight size={12} />
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            )}
+            ))}
           </div>
         )}
       </div>
     </section>
   );
 }
-
