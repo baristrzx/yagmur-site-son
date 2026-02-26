@@ -37,7 +37,11 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const { data: callerProfile } = await callerClient
+    const adminClient = createClient(supabaseUrl, serviceRoleKey, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
+
+    const { data: callerProfile } = await adminClient
       .from("profiles")
       .select("role")
       .eq("id", user.id)
@@ -51,10 +55,6 @@ Deno.serve(async (req: Request) => {
     }
 
     const { email, password, full_name } = await req.json();
-
-    const adminClient = createClient(supabaseUrl, serviceRoleKey, {
-      auth: { autoRefreshToken: false, persistSession: false },
-    });
 
     const { data: newUser, error: createError } = await adminClient.auth.admin.createUser({
       email,
@@ -70,12 +70,19 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    await adminClient.from("profiles").upsert({
+    const { error: profileError } = await adminClient.from("profiles").upsert({
       id: newUser.user.id,
       email,
       full_name,
       role: "client",
     });
+
+    if (profileError) {
+      return new Response(JSON.stringify({ error: profileError.message }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     return new Response(JSON.stringify({ success: true, user: newUser.user }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
