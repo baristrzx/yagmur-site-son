@@ -85,24 +85,37 @@ export default function Contact() {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.25 }}
-            className="rounded-2xl overflow-hidden h-full min-h-[420px] bg-gray-100 relative"
+            className="rounded-2xl overflow-hidden h-full min-h-[420px] bg-navy-900 flex flex-col"
           >
-            <iframe
-              title="ANKH Legal Konum"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=29.0990%2C36.6490%2C29.1290%2C36.6690&layer=mapnik&marker=36.6590%2C29.1140"
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: '420px' }}
-              allowFullScreen
-              loading="lazy"
-            />
-            <div className="absolute bottom-4 left-4 right-4">
-              <div className="bg-navy-800/95 backdrop-blur-sm rounded-xl px-5 py-4 border border-white/10">
-                <p className="text-white font-serif font-semibold text-sm">ANKH Legal</p>
-                <p className="text-white/60 text-xs font-sans mt-0.5">
-                  Foça Mah. 983. Sok. No: 18/2, Fethiye / MUĞLA
+            <a
+              href="https://maps.google.com/?q=36.659,29.114"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex flex-col items-center justify-center gap-6 px-8 py-12 group relative"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-navy-700 via-navy-850 to-navy-950" />
+              <div className="absolute inset-0 opacity-10"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                }}
+              />
+              <div className="relative z-10 w-20 h-20 rounded-full bg-navy-800 border border-gold-500/30 flex items-center justify-center group-hover:scale-110 group-hover:border-gold-500/60 transition-all duration-400 shadow-xl">
+                <MapPin size={32} className="text-gold-400" />
+              </div>
+              <div className="relative z-10 text-center">
+                <p className="text-white font-serif text-xl font-bold">ANKH Legal</p>
+                <p className="text-white/60 text-sm font-sans mt-2 leading-relaxed">
+                  Foça Mah. 983. Sok. No: 18/2<br />Fethiye / MUĞLA
                 </p>
               </div>
+              <div className="relative z-10 mt-2 inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-900 text-sm font-bold font-sans px-6 py-2.5 rounded-full transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gold-500/20">
+                <MapPin size={14} />
+                Google Maps'te Aç
+              </div>
+            </a>
+            <div className="bg-navy-800/80 px-6 py-4 border-t border-white/5 flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
+              <p className="text-white/50 text-xs font-sans">Konuma gitmek için haritaya tıklayın</p>
             </div>
           </motion.div>
         </div>
