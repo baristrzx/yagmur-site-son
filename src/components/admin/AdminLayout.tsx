@@ -3,12 +3,13 @@ import {
   Scale, Users, Briefcase, LogOut, Menu, X, ChevronDown, ChevronRight,
   BookOpen, UserCheck, Star, MessageSquare, Settings,
   Shield, Globe, LayoutDashboard, FileText, PenSquare, Home, Info,
-  Handshake, Phone, FileLock, Cookie, FileWarning, BarChart2
+  Handshake, Phone, FileLock, Cookie, FileWarning, Pencil
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export type AdminView =
   | 'dashboard'
+  | 'page_editor'
   | 'cms_hero'
   | 'cms_about'
   | 'cms_approach'
@@ -53,9 +54,15 @@ function buildNav(unreadMessages: number): NavItem[] {
       icon: <LayoutDashboard className="w-4 h-4" />,
     },
     {
+      type: 'leaf',
+      id: 'page_editor',
+      label: 'Sayfa Editörü',
+      icon: <Pencil className="w-4 h-4" />,
+    },
+    {
       type: 'group',
       id: 'pages',
-      label: 'Sayfa Yönetimi',
+      label: 'Sayfa Yönetimi (Eski)',
       icon: <Globe className="w-4 h-4" />,
       children: [
         { type: 'leaf', id: 'cms_hero',     label: 'Hero',      icon: <Home className="w-3.5 h-3.5" /> },

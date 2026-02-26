@@ -11,6 +11,7 @@ import MessagesPanel from './MessagesPanel';
 import CmsPanel from './CmsPanel';
 import LegalPagesPanel from './LegalPagesPanel';
 import SiteSettingsPanel from './SiteSettingsPanel';
+import PageEditorPanel from './PageEditorPanel';
 import { supabase } from '../../lib/supabase';
 
 const CMS_SECTION_MAP: Partial<Record<AdminView, string>> = {
@@ -47,6 +48,7 @@ export default function AdminDashboard() {
     }
     switch (view) {
       case 'dashboard':      return <DashboardPanel onNavigate={setView} />;
+      case 'page_editor':    return <PageEditorPanel />;
       case 'cases':          return <CasesPanel />;
       case 'clients':        return <ClientsPanel />;
       case 'blog_list':      return <BlogPanel initialView="list" />;
