@@ -27,9 +27,6 @@ export default function Founder() {
             <h3 className="mt-3 font-serif text-3xl md:text-4xl font-bold text-navy-800 leading-tight">
               Av. Arb. Yağmur Koçak Arat
             </h3>
-            <p className="mt-1 text-gold-600 font-sans text-sm font-medium tracking-wide">
-              Kurucu Avukat | Arabulucu
-            </p>
             <div className="mt-2 w-12 h-1 bg-gold-500 rounded-full" />
           </div>
 
