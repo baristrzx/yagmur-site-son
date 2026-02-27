@@ -88,7 +88,7 @@ export default function Contact() {
             className="rounded-2xl overflow-hidden h-full min-h-[420px] bg-navy-900 flex flex-col"
           >
             <a
-              href="https://www.google.com/maps/search/?api=1&query=36.659,29.114"
+              href="https://maps.app.goo.gl/Cp77Y56HyycVvpJWA"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex flex-col items-center justify-center gap-6 px-8 py-12 group relative"
