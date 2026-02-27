@@ -12,6 +12,7 @@ import AdminLoginPage from './components/admin/AdminLoginPage';
 import AdminDashboard from './components/admin/AdminDashboard';
 import ClientLoginPage from './components/portal/ClientLoginPage';
 import ClientDashboard from './components/portal/ClientDashboard';
+import BlogDetailPage from './components/BlogDetailPage';
 
 function Spinner() {
   return (
@@ -27,6 +28,7 @@ function AppContent() {
 
   const isAdminPath = path.startsWith('/admin');
   const isClientPath = path.startsWith('/client-panel');
+  const isBlogPath = path.startsWith('/blog/');
 
   if (loading) return <Spinner />;
 
@@ -42,6 +44,11 @@ function AppContent() {
     if (!profile) return <Spinner />;
     if (profile.role !== 'client') return <ClientLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." />;
     return <ClientDashboard />;
+  }
+
+  if (isBlogPath) {
+    const slug = path.split('/blog/')[1];
+    return <BlogDetailPage slug={slug} />;
   }
 
   return (
