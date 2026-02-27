@@ -115,24 +115,26 @@ export default function Expertise() {
             <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          <div className="flex flex-col gap-3 mb-3">
             {goldTriangle.map((item, i) => (
               <motion.div
                 key={item.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.15 * i }}
-                className="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/8 hover:border-gold-500/30 transition-all duration-300 group"
+                initial={{ opacity: 0, x: -20 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.15 * i }}
+                className="rounded-xl border border-white/10 bg-white/5 px-5 py-4 hover:bg-white/8 hover:border-gold-500/30 transition-all duration-300 group flex items-start gap-4"
               >
-                <div className="w-9 h-9 rounded-lg bg-gold-500/10 border border-gold-500/30 group-hover:bg-gold-500 group-hover:border-gold-500 flex items-center justify-center mb-4 flex-shrink-0 transition-all duration-300">
+                <div className="w-9 h-9 rounded-lg bg-gold-500/10 border border-gold-500/30 group-hover:bg-gold-500 group-hover:border-gold-500 flex items-center justify-center flex-shrink-0 transition-all duration-300 mt-0.5">
                   <item.icon size={16} className="text-gold-400 group-hover:text-navy-800 transition-colors duration-300" />
                 </div>
-                <h3 className="font-sans text-sm font-bold text-white mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-white/50 text-xs leading-relaxed font-sans">
-                  {item.desc}
-                </p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-sans text-sm font-bold text-white mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/50 text-xs leading-relaxed font-sans">
+                    {item.desc}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -185,26 +187,30 @@ export default function Expertise() {
                     className="overflow-hidden"
                   >
                     <div className="border-t border-white/10 px-5 pb-5 pt-3">
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
+                      <div className="flex flex-col gap-2 mb-3">
                         {otherAreas.map((area) => (
                           <button
                             key={area.title}
                             onClick={() => setSelectedOther(p => p?.title === area.title ? null : area)}
-                            className={`text-left rounded-lg border px-4 py-3 transition-all duration-200 group ${
+                            className={`text-left rounded-lg border px-4 py-3 transition-all duration-200 group flex items-center gap-3 ${
                               selectedOther?.title === area.title
                                 ? 'border-gold-500/60 bg-gold-500/10'
                                 : 'border-white/10 bg-white/4 hover:border-gold-500/30 hover:bg-white/8'
                             }`}
                           >
-                            <div className="flex items-center gap-2 mb-1.5">
-                              <area.icon
-                                size={14}
-                                className={`flex-shrink-0 transition-colors duration-200 ${
-                                  selectedOther?.title === area.title ? 'text-gold-400' : 'text-gold-400/60 group-hover:text-gold-400'
-                                }`}
-                              />
-                              <span className="text-white text-xs font-bold font-sans leading-snug">{area.title}</span>
-                            </div>
+                            <area.icon
+                              size={14}
+                              className={`flex-shrink-0 transition-colors duration-200 ${
+                                selectedOther?.title === area.title ? 'text-gold-400' : 'text-gold-400/60 group-hover:text-gold-400'
+                              }`}
+                            />
+                            <span className="text-white text-xs font-bold font-sans">{area.title}</span>
+                            <ChevronDown
+                              size={12}
+                              className={`ml-auto flex-shrink-0 text-gold-400/50 transition-transform duration-200 ${
+                                selectedOther?.title === area.title ? 'rotate-180 text-gold-400' : ''
+                              }`}
+                            />
                           </button>
                         ))}
                       </div>
