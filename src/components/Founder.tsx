@@ -63,11 +63,7 @@ export default function Founder() {
             <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
               Ticari, sigorta ve iş hukuku kaynaklı ihtilaflarda hem temsil hem arabuluculuk
               faaliyetleri yürütmekte; hukuki risk ile ekonomik sonuç arasındaki dengeyi esas
-              almaktadır.
-            </p>
-            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] italic border-l-2 border-gold-400 pl-4">
-              Dava süreçlerinde disiplinli ve kararlı,<br />
-              müzakerede stratejik ve hesaplı,<br />
+              almaktadır. Dava süreçlerinde disiplinli ve kararlı, müzakerede stratejik ve hesaplı,
               arabuluculukta ise çözüm odaklıdır.
             </p>
             <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
