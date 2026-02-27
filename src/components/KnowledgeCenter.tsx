@@ -73,6 +73,7 @@ export default function KnowledgeCenter() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.15 + i * 0.08 }}
+                onClick={() => window.open(`/blog/${post.slug}`, '_self')}
                 className="group rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white flex flex-col cursor-pointer"
               >
                 {post.cover_image && (
