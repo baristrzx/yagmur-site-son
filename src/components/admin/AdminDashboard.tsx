@@ -8,18 +8,10 @@ import LawyersPanel from './LawyersPanel';
 import PracticeAreasPanel from './PracticeAreasPanel';
 import TestimonialsPanel from './TestimonialsPanel';
 import MessagesPanel from './MessagesPanel';
-import CmsPanel from './CmsPanel';
 import LegalPagesPanel from './LegalPagesPanel';
 import SiteSettingsPanel from './SiteSettingsPanel';
 import PageEditorPanel from './PageEditorPanel';
 import { supabase } from '../../lib/supabase';
-
-const CMS_SECTION_MAP: Partial<Record<AdminView, string>> = {
-  cms_hero: 'hero',
-  cms_about: 'about',
-  cms_approach: 'approach',
-  cms_contact: 'contact',
-};
 
 const LEGAL_SLUG_MAP: Partial<Record<AdminView, string>> = {
   legal_kvkk: 'kvkk',
@@ -40,9 +32,6 @@ export default function AdminDashboard() {
   }, [view]);
 
   function renderPanel() {
-    if (CMS_SECTION_MAP[view]) {
-      return <CmsPanel section={CMS_SECTION_MAP[view]!} />;
-    }
     if (LEGAL_SLUG_MAP[view]) {
       return <LegalPagesPanel slug={LEGAL_SLUG_MAP[view]!} />;
     }

@@ -56,20 +56,8 @@ function buildNav(unreadMessages: number): NavItem[] {
     {
       type: 'leaf',
       id: 'page_editor',
-      label: 'Sayfa Editörü',
+      label: 'Sayfa İçerikleri',
       icon: <Pencil className="w-4 h-4" />,
-    },
-    {
-      type: 'group',
-      id: 'pages',
-      label: 'Sayfa Yönetimi (Eski)',
-      icon: <Globe className="w-4 h-4" />,
-      children: [
-        { type: 'leaf', id: 'cms_hero',     label: 'Hero',      icon: <Home className="w-3.5 h-3.5" /> },
-        { type: 'leaf', id: 'cms_about',    label: 'Hakkımda',  icon: <Info className="w-3.5 h-3.5" /> },
-        { type: 'leaf', id: 'cms_approach', label: 'Yaklaşım',  icon: <Handshake className="w-3.5 h-3.5" /> },
-        { type: 'leaf', id: 'cms_contact',  label: 'İletişim',  icon: <Phone className="w-3.5 h-3.5" /> },
-      ],
     },
     {
       type: 'group',

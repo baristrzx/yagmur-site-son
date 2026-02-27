@@ -42,7 +42,7 @@ export default function DashboardPanel({ onNavigate }: Props) {
     { label: 'Aktif Dava', value: stats.cases, icon: <Briefcase className="w-6 h-6" />, color: 'bg-blue-50 text-blue-600', view: 'cases' as AdminView },
     { label: 'Müvekkil', value: stats.clients, icon: <Users className="w-6 h-6" />, color: 'bg-green-50 text-green-600', view: 'clients' as AdminView },
     { label: 'Okunmamış Mesaj', value: stats.unreadMessages, icon: <MessageSquare className="w-6 h-6" />, color: 'bg-red-50 text-red-600', view: 'messages' as AdminView },
-    { label: 'Blog Yazısı', value: stats.blogPosts, icon: <BookOpen className="w-6 h-6" />, color: 'bg-amber-50 text-amber-600', view: 'blog' as AdminView },
+    { label: 'Blog Yazısı', value: stats.blogPosts, icon: <BookOpen className="w-6 h-6" />, color: 'bg-amber-50 text-amber-600', view: 'blog_list' as AdminView },
   ];
 
   if (loading) return (
@@ -108,7 +108,7 @@ export default function DashboardPanel({ onNavigate }: Props) {
             {[
               { label: 'Yeni dava oluştur', view: 'cases' as AdminView },
               { label: 'Müvekkil ekle', view: 'clients' as AdminView },
-              { label: 'Blog yazısı yaz', view: 'blog' as AdminView },
+              { label: 'Blog yazısı yaz', view: 'blog_new' as AdminView },
               { label: 'Mesajları oku', view: 'messages' as AdminView },
               { label: 'Site ayarları', view: 'settings' as AdminView },
             ].map(item => (

@@ -33,11 +33,17 @@ export default function CasesPanel() {
     try {
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
       const session = (await supabase.auth.getSession()).data.session;
-      await fetch(`${supabaseUrl}/functions/v1/send-stage-update-email`, {
+
+      if (!session?.access_token) {
+        console.error('Email notification failed: No auth session');
+        return;
+      }
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-stage-update-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token}`,
+          'Authorization': `Bearer ${session.access_token}`,
           'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
         },
         body: JSON.stringify({
@@ -47,8 +53,12 @@ export default function CasesPanel() {
           currentStage: caseData.current_stage,
         }),
       });
-    } catch {
-      // Email failure is non-blocking
+
+      if (!response.ok) {
+        console.error('Email notification failed:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Email notification error:', error);
     }
   }
 
