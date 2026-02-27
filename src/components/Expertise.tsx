@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Landmark, Building2, Globe2, Briefcase, Heart, Shield, UserCheck, Handshake, Scale, ListChecks, Target } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { Landmark, Building2, Globe2, Briefcase, Heart, Shield, UserCheck, Handshake, Scale, ListChecks, Target, ChevronDown } from 'lucide-react';
 
 const goldTriangle = [
   {
@@ -85,6 +85,8 @@ const arabuluculukSections = [
 export default function Expertise() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const [otherOpen, setOtherOpen] = useState(false);
+  const [selectedOther, setSelectedOther] = useState<typeof otherAreas[0] | null>(null);
 
   const refAra = useRef(null);
   const inViewAra = useInView(refAra, { once: true, margin: '-80px' });
@@ -141,22 +143,94 @@ export default function Expertise() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mb-6"
           >
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {otherAreas.map((area, i) => (
-                <motion.div
-                  key={area.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
-                  className="rounded-xl border border-white/10 bg-white/4 p-5 hover:border-gold-500/30 hover:bg-white/8 transition-all duration-300 group"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-gold-500/10 border border-gold-500/20 group-hover:bg-gold-500/20 flex items-center justify-center mb-4 transition-all duration-300">
-                    <area.icon size={16} className="text-gold-400" />
+            <div
+              className={`rounded-xl border transition-all duration-300 ${
+                otherOpen
+                  ? 'border-gold-500/40 bg-white/8'
+                  : 'border-white/10 bg-white/4 hover:border-gold-500/30 hover:bg-white/8'
+              }`}
+            >
+              <button
+                onClick={() => { setOtherOpen(p => !p); setSelectedOther(null); }}
+                className="w-full flex items-center justify-between px-5 py-4 group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-9 h-9 rounded-lg border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                    otherOpen
+                      ? 'bg-gold-500 border-gold-500'
+                      : 'bg-gold-500/10 border-gold-500/20 group-hover:bg-gold-500/20'
+                  }`}>
+                    <Briefcase size={16} className={`transition-colors duration-300 ${otherOpen ? 'text-navy-800' : 'text-gold-400'}`} />
                   </div>
-                  <h4 className="font-sans text-sm font-bold text-white mb-2">{area.title}</h4>
-                  <p className="text-white/50 text-xs leading-relaxed font-sans">{area.desc}</p>
-                </motion.div>
-              ))}
+                  <div className="text-left">
+                    <h4 className="font-sans text-sm font-bold text-white">Diğer</h4>
+                    <p className="text-white/40 text-xs font-sans mt-0.5">
+                      İş, Aile, Ceza ve İdari Hukuk
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown
+                  size={16}
+                  className={`text-gold-400 flex-shrink-0 transition-transform duration-300 ${otherOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {otherOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="border-t border-white/10 px-5 pb-5 pt-3">
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
+                        {otherAreas.map((area) => (
+                          <button
+                            key={area.title}
+                            onClick={() => setSelectedOther(p => p?.title === area.title ? null : area)}
+                            className={`text-left rounded-lg border px-4 py-3 transition-all duration-200 group ${
+                              selectedOther?.title === area.title
+                                ? 'border-gold-500/60 bg-gold-500/10'
+                                : 'border-white/10 bg-white/4 hover:border-gold-500/30 hover:bg-white/8'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2 mb-1.5">
+                              <area.icon
+                                size={14}
+                                className={`flex-shrink-0 transition-colors duration-200 ${
+                                  selectedOther?.title === area.title ? 'text-gold-400' : 'text-gold-400/60 group-hover:text-gold-400'
+                                }`}
+                              />
+                              <span className="text-white text-xs font-bold font-sans leading-snug">{area.title}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+
+                      <AnimatePresence mode="wait">
+                        {selectedOther && (
+                          <motion.div
+                            key={selectedOther.title}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.2 }}
+                            className="rounded-lg border border-gold-500/20 bg-gold-500/5 px-4 py-3"
+                          >
+                            <div className="flex items-center gap-2 mb-2">
+                              <selectedOther.icon size={14} className="text-gold-400 flex-shrink-0" />
+                              <span className="text-gold-300 text-xs font-bold font-sans">{selectedOther.title}</span>
+                            </div>
+                            <p className="text-white/60 text-xs leading-relaxed font-sans">{selectedOther.desc}</p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>
