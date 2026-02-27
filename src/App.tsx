@@ -44,11 +44,6 @@ function AppContent() {
     return <ClientDashboard />;
   }
 
-  if (user && profile) {
-    if (profile.role === 'admin') return <AdminDashboard />;
-    if (profile.role === 'client') return <ClientDashboard />;
-  }
-
   return (
     <div className="font-sans antialiased">
       <Navbar />

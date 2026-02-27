@@ -16,7 +16,8 @@ export default function KnowledgeCenter() {
       .from('blog_posts')
       .select('*, blog_categories(*)')
       .eq('is_published', true)
-      .order('published_at', { ascending: false })
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .order('created_at', { ascending: false })
       .limit(6)
       .then(({ data }) => {
         setPosts((data as PostWithCategory[]) || []);
