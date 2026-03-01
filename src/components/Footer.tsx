@@ -27,17 +27,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-3 gap-12">
           <div>
-            <a href="/" className="flex items-start mb-5">
+            <a href="/" className="flex items-start">
               <img
                 src="/image.png"
                 alt="ANKH Legal"
                 className="h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
               />
             </a>
-            <p className="text-white/50 text-sm font-sans leading-relaxed max-w-xs">
-              Stratejik dava yönetimi ve yüksek nitelikli hukuki danışmanlık. Risk analizi ve uzun
-              vadeli güvenlik perspektifiyle hukuki çözümler.
-            </p>
           </div>
 
           <div>
