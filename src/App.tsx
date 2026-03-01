@@ -30,7 +30,7 @@ function AppContent() {
   const isAdminPath = path.startsWith('/admin');
   const isClientPath = path.startsWith('/client-panel');
   const isBlogPath = path.startsWith('/blog/');
-  const isLegalPath = path.startsWith('/yasal/');
+  const isLegalPath = path.startsWith('/yasal-');
 
   if (loading) return <Spinner />;
 
@@ -54,7 +54,7 @@ function AppContent() {
   }
 
   if (isLegalPath) {
-    const slug = path.split('/yasal/')[1];
+    const slug = path.substring(1);
     return <LegalPage slug={slug} />;
   }
 
