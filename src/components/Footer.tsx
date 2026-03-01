@@ -64,6 +64,15 @@ export default function Footer() {
               Yasal
             </h4>
             <ul className="flex flex-col gap-3">
+              <li>
+                <a
+                  href="/yasal-uyari"
+                  className="text-white/60 hover:text-gold-400 text-sm font-sans transition-colors duration-200 flex items-center gap-2 group"
+                >
+                  <span className="w-3 h-px bg-gold-500/40 group-hover:w-5 group-hover:bg-gold-400 transition-all duration-200" />
+                  Yasal Uyarı ve Sorumluluk Reddi
+                </a>
+              </li>
               {legalPages.map((page) => (
                 <li key={page.id}>
                   <a
