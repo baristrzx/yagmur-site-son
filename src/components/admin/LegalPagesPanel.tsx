@@ -83,8 +83,13 @@ export default function LegalPagesPanel() {
 
   async function handleDelete(id: string) {
     if (!confirm('Bu sayfayı silmek istediğinizden emin misiniz?')) return;
-    await supabase.from('legal_pages').delete().eq('id', id);
-    loadPages();
+    const { error } = await supabase.from('legal_pages').delete().eq('id', id);
+    if (error) {
+      alert('Silme işlemi başarısız oldu: ' + error.message);
+      console.error('Delete error:', error);
+    } else {
+      loadPages();
+    }
   }
 
   async function togglePublish(page: LegalPage) {
