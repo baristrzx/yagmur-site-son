@@ -79,12 +79,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-6 border-t border-white/10 text-center">
           <p className="text-white/30 text-xs font-sans">
             © {new Date().getFullYear()} ANKH Legal. Tüm hakları saklıdır.
-          </p>
-          <p className="text-white/30 text-xs font-sans">
-            Av. Arb. Yağmur Koçak | Baro Sicil No: —
           </p>
         </div>
       </div>
