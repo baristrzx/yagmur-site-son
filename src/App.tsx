@@ -13,6 +13,7 @@ import AdminDashboard from './components/admin/AdminDashboard';
 import ClientLoginPage from './components/portal/ClientLoginPage';
 import ClientDashboard from './components/portal/ClientDashboard';
 import BlogDetailPage from './components/BlogDetailPage';
+import LegalPage from './components/LegalPage';
 
 function Spinner() {
   return (
@@ -29,6 +30,7 @@ function AppContent() {
   const isAdminPath = path.startsWith('/admin');
   const isClientPath = path.startsWith('/client-panel');
   const isBlogPath = path.startsWith('/blog/');
+  const isLegalPath = path.startsWith('/yasal/');
 
   if (loading) return <Spinner />;
 
@@ -49,6 +51,11 @@ function AppContent() {
   if (isBlogPath) {
     const slug = path.split('/blog/')[1];
     return <BlogDetailPage slug={slug} />;
+  }
+
+  if (isLegalPath) {
+    const slug = path.split('/yasal/')[1];
+    return <LegalPage slug={slug} />;
   }
 
   return (

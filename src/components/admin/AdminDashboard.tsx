@@ -13,12 +13,6 @@ import SiteSettingsPanel from './SiteSettingsPanel';
 import PageEditorPanel from './PageEditorPanel';
 import { supabase } from '../../lib/supabase';
 
-const LEGAL_SLUG_MAP: Partial<Record<AdminView, string>> = {
-  legal_kvkk: 'kvkk',
-  legal_aydinlatma: 'aydinlatma-metni',
-  legal_cerez: 'cerez-politikasi',
-};
-
 export default function AdminDashboard() {
   const [view, setView] = useState<AdminView>('dashboard');
   const [unreadMessages, setUnreadMessages] = useState(0);
@@ -32,9 +26,6 @@ export default function AdminDashboard() {
   }, [view]);
 
   function renderPanel() {
-    if (LEGAL_SLUG_MAP[view]) {
-      return <LegalPagesPanel slug={LEGAL_SLUG_MAP[view]!} />;
-    }
     switch (view) {
       case 'dashboard':      return <DashboardPanel onNavigate={setView} />;
       case 'page_editor':    return <PageEditorPanel />;
@@ -46,6 +37,7 @@ export default function AdminDashboard() {
       case 'practice_areas': return <PracticeAreasPanel />;
       case 'testimonials':   return <TestimonialsPanel />;
       case 'messages':       return <MessagesPanel />;
+      case 'legal_pages':    return <LegalPagesPanel />;
       case 'settings':       return <SiteSettingsPanel />;
       default:               return <DashboardPanel onNavigate={setView} />;
     }

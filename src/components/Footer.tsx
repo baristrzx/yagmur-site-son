@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { supabase, type LegalPage } from '../lib/supabase';
 
 const quickLinks = [
   { label: 'Stratejik Yaklaşım', href: '#stratejik-yaklasim' },
@@ -7,10 +9,23 @@ const quickLinks = [
 ];
 
 export default function Footer() {
+  const [legalPages, setLegalPages] = useState<LegalPage[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from('legal_pages')
+      .select('*')
+      .eq('is_published', true)
+      .order('display_order', { ascending: true })
+      .then(({ data }) => {
+        setLegalPages(data || []);
+      });
+  }, []);
+
   return (
     <footer className="bg-navy-900 text-white">
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid md:grid-cols-4 gap-12">
           <div>
             <a href="#" className="flex items-start mb-5">
               <img
@@ -38,6 +53,25 @@ export default function Footer() {
                   >
                     <span className="w-3 h-px bg-gold-500/40 group-hover:w-5 group-hover:bg-gold-400 transition-all duration-200" />
                     {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-sans font-semibold text-sm tracking-widest uppercase text-white/60 mb-5">
+              Yasal
+            </h4>
+            <ul className="flex flex-col gap-3">
+              {legalPages.map((page) => (
+                <li key={page.id}>
+                  <a
+                    href={`/yasal/${page.slug}`}
+                    className="text-white/60 hover:text-gold-400 text-sm font-sans transition-colors duration-200 flex items-center gap-2 group"
+                  >
+                    <span className="w-3 h-px bg-gold-500/40 group-hover:w-5 group-hover:bg-gold-400 transition-all duration-200" />
+                    {page.title_tr}
                   </a>
                 </li>
               ))}

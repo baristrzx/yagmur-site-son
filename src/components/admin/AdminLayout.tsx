@@ -22,9 +22,7 @@ export type AdminView =
   | 'messages'
   | 'clients'
   | 'cases'
-  | 'legal_kvkk'
-  | 'legal_aydinlatma'
-  | 'legal_cerez'
+  | 'legal_pages'
   | 'settings';
 
 type NavLeaf = {
@@ -105,15 +103,10 @@ function buildNav(unreadMessages: number): NavItem[] {
       ],
     },
     {
-      type: 'group',
-      id: 'legal',
+      type: 'leaf',
+      id: 'legal_pages',
       label: 'Yasal Sayfalar',
       icon: <Shield className="w-4 h-4" />,
-      children: [
-        { type: 'leaf', id: 'legal_kvkk',       label: 'KVKK',             icon: <FileLock className="w-3.5 h-3.5" /> },
-        { type: 'leaf', id: 'legal_aydinlatma',  label: 'Aydınlatma Metni', icon: <FileWarning className="w-3.5 h-3.5" /> },
-        { type: 'leaf', id: 'legal_cerez',       label: 'Çerez Politikası', icon: <Cookie className="w-3.5 h-3.5" /> },
-      ],
     },
     {
       type: 'leaf',

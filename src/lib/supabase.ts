@@ -137,6 +137,10 @@ export type LegalPage = {
   title_en: string;
   content_tr: string;
   content_en: string;
+  meta_description_tr: string | null;
+  is_published: boolean;
+  display_order: number;
+  created_at: string;
   updated_at: string;
 };
 
