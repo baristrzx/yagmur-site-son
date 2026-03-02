@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Calendar, Tag, Clock } from 'lucide-react';
+import { ArrowLeft, Calendar, Tag, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { supabase, type BlogPost, type BlogCategory } from '../lib/supabase';
 
 type PostWithCategory = BlogPost & { blog_categories: BlogCategory | null };
 
 export default function BlogDetailPage({ slug }: { slug: string }) {
   const [post, setPost] = useState<PostWithCategory | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<PostWithCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -25,8 +26,16 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
         setNotFound(true);
       } else {
         setPost(data as PostWithCategory);
-
         await supabase.rpc('increment_blog_view_count', { post_id: data.id });
+
+        const { data: related } = await supabase
+          .from('blog_posts')
+          .select('*, blog_categories(*)')
+          .eq('is_published', true)
+          .neq('slug', slug)
+          .order('published_at', { ascending: false, nullsFirst: false })
+          .limit(3);
+        setRelatedPosts((related as PostWithCategory[]) || []);
       }
 
       setLoading(false);
@@ -154,6 +163,82 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
           </div>
         </div>
       </article>
+
+      {relatedPosts.length > 0 && (
+        <div className="max-w-4xl mx-auto px-6 pb-16">
+          <div className="border-t border-gray-200 pt-12">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h2 className="font-serif text-2xl font-bold text-navy-800">Diğer Yazılar</h2>
+                <p className="text-gray-400 text-sm mt-1">Okumaya devam edin</p>
+              </div>
+              <a
+                href="/#knowledge"
+                className="inline-flex items-center gap-2 text-gold-600 hover:text-gold-700 text-sm font-semibold transition-colors"
+              >
+                Tümünü Gör
+                <ArrowRight size={14} />
+              </a>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-5">
+              {relatedPosts.map((related) => (
+                <a
+                  key={related.id}
+                  href={`/blog/${related.slug}`}
+                  className="group rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white flex flex-col"
+                >
+                  {related.cover_image ? (
+                    <div className="relative aspect-video overflow-hidden bg-navy-900">
+                      <img
+                        src={related.cover_image}
+                        alt={related.title_tr}
+                        className="w-full h-full object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy-900/50 via-transparent to-transparent" />
+                      {related.blog_categories && (
+                        <div className="absolute top-2 left-2">
+                          <span className="bg-white/90 backdrop-blur-sm text-navy-800 text-[9px] font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-full">
+                            {related.blog_categories.name_tr}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="aspect-video bg-navy-50 flex items-center justify-center">
+                      <BookOpen size={28} className="text-navy-200" />
+                    </div>
+                  )}
+                  <div className="p-4 flex flex-col flex-1">
+                    {related.blog_categories && !related.cover_image && (
+                      <div className="flex items-center gap-1.5 mb-2">
+                        <Tag size={10} className="text-gold-500" />
+                        <span className="text-gold-600 text-[10px] font-semibold tracking-widest uppercase">
+                          {related.blog_categories.name_tr}
+                        </span>
+                      </div>
+                    )}
+                    <h3 className="font-serif text-sm font-bold text-navy-800 leading-snug group-hover:text-gold-700 transition-colors line-clamp-2 flex-1">
+                      {related.title_tr}
+                    </h3>
+                    {related.published_at && (
+                      <div className="flex items-center gap-1.5 text-gray-400 text-[10px] mt-3">
+                        <Calendar size={10} />
+                        {new Date(related.published_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </div>
+                    )}
+                    <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-end">
+                      <span className="inline-flex items-center gap-1 text-gold-600 text-xs font-semibold group-hover:gap-2 transition-all duration-200">
+                        Oku
+                        <ArrowRight size={11} />
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
