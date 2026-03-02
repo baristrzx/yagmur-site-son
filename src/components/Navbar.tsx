@@ -99,6 +99,14 @@ export default function Navbar() {
           </a>
 
           <a
+            href="#knowledge"
+            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+          >
+            Bilgi Merkezi
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
+          </a>
+
+          <a
             href="#founder"
             className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
           >
@@ -167,6 +175,14 @@ export default function Navbar() {
                 className="text-white/80 hover:text-gold-400 text-sm font-medium py-2.5 transition-colors border-b border-white/5"
               >
                 Arabuluculuk
+              </a>
+
+              <a
+                href="#knowledge"
+                onClick={() => setMenuOpen(false)}
+                className="text-white/80 hover:text-gold-400 text-sm font-medium py-2.5 transition-colors border-b border-white/5"
+              >
+                Bilgi Merkezi
               </a>
 
               <a
