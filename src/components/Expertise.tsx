@@ -104,11 +104,8 @@ export default function Expertise() {
             transition={{ duration: 0.7 }}
             className="text-center mb-16"
           >
-            <span className="text-gold-400 text-xs font-semibold tracking-[0.25em] uppercase font-sans">
-              Uzmanlık Alanlarımız
-            </span>
             <h2 className="mt-4 font-serif text-4xl md:text-5xl font-bold text-white leading-tight">
-              UZMANLIK ALANLARIMIZ
+              ÇALIŞMA ALANLARIMIZ
             </h2>
             <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
           </motion.div>
