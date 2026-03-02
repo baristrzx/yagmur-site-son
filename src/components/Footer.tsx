@@ -4,6 +4,8 @@ import { supabase, type LegalPage } from '../lib/supabase';
 const quickLinks = [
   { label: 'Stratejik Yaklaşım', href: '/#stratejik-yaklasim' },
   { label: 'Uzmanlık Alanları', href: '/#expertise' },
+  { label: 'Arabuluculuk', href: '/#arabuluculuk' },
+  { label: 'Bilgi Merkezi', href: '/#knowledge' },
   { label: 'Kurucu', href: '/#founder' },
   { label: 'İletişim', href: '/#contact' },
 ];
