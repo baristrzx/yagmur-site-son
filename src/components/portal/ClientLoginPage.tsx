@@ -1,13 +1,9 @@
 import { useState } from 'react';
-import { Scale, Eye, EyeOff, AlertCircle, ShieldAlert, ArrowLeft } from 'lucide-react';
+import { Scale, Eye, EyeOff, AlertCircle, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-type ClientLoginPageProps = {
-  unauthorizedMessage?: string;
-};
-
-export default function ClientLoginPage({ unauthorizedMessage }: ClientLoginPageProps) {
-  const { signIn, signOut, user } = useAuth();
+export default function ClientLoginPage() {
+  const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -23,31 +19,6 @@ export default function ClientLoginPage({ unauthorizedMessage }: ClientLoginPage
       setError('E-posta veya şifre hatalı. Lütfen tekrar deneyin.');
     }
     setLoading(false);
-  }
-
-  if (unauthorizedMessage && user) {
-    return (
-      <div className="min-h-screen bg-[#001530] flex items-center justify-center px-4">
-        <div className="w-full max-w-md text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 mb-6">
-            <ShieldAlert className="w-8 h-8 text-amber-400" />
-          </div>
-          <h1 className="font-serif text-2xl text-white mb-3">Erişim Reddedildi</h1>
-          <p className="text-white/50 text-sm mb-8">{unauthorizedMessage}</p>
-          <div className="flex gap-3 justify-center">
-            <a href="/" className="flex items-center gap-2 px-5 py-2.5 border border-white/20 text-white/60 hover:text-white rounded-xl text-sm transition-colors">
-              <ArrowLeft className="w-4 h-4" /> Ana Sayfa
-            </a>
-            <button
-              onClick={signOut}
-              className="px-6 py-2.5 bg-gold-500 hover:bg-gold-400 text-navy-900 rounded-xl text-sm font-medium transition-colors"
-            >
-              Çıkış Yap
-            </button>
-          </div>
-        </div>
-      </div>
-    );
   }
 
   return (

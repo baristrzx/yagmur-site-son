@@ -44,7 +44,7 @@ function AppContent() {
   if (isClientPath) {
     if (!user) return <ClientLoginPage />;
     if (!profile) return <Spinner />;
-    if (profile.role !== 'client') return <ClientLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." />;
+    if (profile.role !== 'client') return <ClientLoginPage />;
     return <ClientDashboard />;
   }
 
