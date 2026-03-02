@@ -30,7 +30,8 @@ function AppContent() {
   const isAdminPath = path.startsWith('/admin');
   const isClientPath = path.startsWith('/client-panel');
   const isBlogPath = path.startsWith('/blog/');
-  const isLegalPath = path.startsWith('/yasal-');
+  const legalSlugs = ['yasal-', 'kvkk', 'cerez-politikasi'];
+  const isLegalPath = legalSlugs.some((s) => path.startsWith(`/${s}`));
 
   if (loading) return <Spinner />;
 
