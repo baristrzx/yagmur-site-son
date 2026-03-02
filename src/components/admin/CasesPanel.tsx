@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Plus, Pencil, Calendar, AlertCircle, CheckCircle, Briefcase, Search, FileText, ArrowLeft, Upload, Trash2, MessageSquare, Eye, EyeOff } from 'lucide-react';
+import { Plus, Pencil, Calendar, AlertCircle, CheckCircle, Briefcase, Search, FileText, ArrowLeft, Upload, Trash2, MessageSquare, Eye, EyeOff, X } from 'lucide-react';
 import { supabase, type Case, type CaseWithClient, type CaseDocument, type CaseNote } from '../../lib/supabase';
 import CaseFormModal from './CaseFormModal';
 import { useAuth } from '../../context/AuthContext';
@@ -102,35 +102,36 @@ export default function CasesPanel() {
   return (
     <div>
       {toast && (
-        <div className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-xl shadow-lg border text-sm font-medium
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border text-sm font-medium max-w-[calc(100vw-2rem)]
           ${toast.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'}`}>
-          {toast.type === 'success' ? <CheckCircle className="w-5 h-5 text-green-500" /> : <AlertCircle className="w-5 h-5 text-red-500" />}
-          {toast.message}
+          {toast.type === 'success' ? <CheckCircle className="w-5 h-5 text-green-500 shrink-0" /> : <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />}
+          <span className="truncate">{toast.message}</span>
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 sm:mb-6">
         <div>
-          <h1 className="font-serif text-2xl text-navy-900">Dava Yönetimi</h1>
+          <h1 className="font-serif text-xl sm:text-2xl text-navy-900">Dava Yönetimi</h1>
           <p className="text-gray-500 text-sm mt-1">{cases.length} aktif dava</p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="relative">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="relative flex-1 sm:flex-none">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Dava veya müvekkil ara..."
-              className="pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-navy-400 focus:ring-1 focus:ring-navy-200 w-56"
+              className="pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-navy-400 focus:ring-1 focus:ring-navy-200 w-full sm:w-52"
             />
           </div>
           <button
             onClick={() => { setEditingCase(null); setShowModal(true); }}
-            className="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors whitespace-nowrap"
+            className="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white px-3 sm:px-4 py-2.5 rounded-lg text-sm font-medium transition-colors whitespace-nowrap shrink-0"
           >
             <Plus className="w-4 h-4" />
-            Yeni Dava
+            <span className="hidden sm:inline">Yeni Dava</span>
+            <span className="sm:hidden">Yeni</span>
           </button>
         </div>
       </div>
@@ -145,51 +146,56 @@ export default function CasesPanel() {
           <p className="text-gray-500">{search ? 'Aramanızla eşleşen dava bulunamadı.' : 'Henüz dava eklenmemiş.'}</p>
         </div>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid gap-3 sm:gap-4">
           {filtered.map(c => (
-            <div key={c.id} className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start justify-between gap-4">
+            <div key={c.id} className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-1 flex-wrap">
-                    <span className="text-xs font-mono font-semibold text-navy-600 bg-navy-50 px-2.5 py-1 rounded-md border border-navy-100">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <span className="text-xs font-mono font-semibold text-navy-600 bg-navy-50 px-2 py-0.5 rounded-md border border-navy-100 shrink-0">
                       {c.case_number}
                     </span>
-                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${stageColor[c.current_stage] || 'bg-gray-100 text-gray-600'}`}>
+                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${stageColor[c.current_stage] || 'bg-gray-100 text-gray-600'}`}>
                       {c.current_stage || '—'}
                     </span>
                   </div>
-                  <h3 className="font-serif text-navy-900 text-lg mt-2">{c.title}</h3>
-                  <p className="text-gray-500 text-sm mt-1">
-                    Müvekkil: <span className="text-gray-700 font-medium">{c.profiles?.full_name}</span>
+                  <h3 className="font-serif text-navy-900 text-base sm:text-lg mt-1.5 leading-snug">{c.title}</h3>
+                  <p className="text-gray-500 text-sm mt-0.5">
+                    <span className="text-gray-700 font-medium truncate">{c.profiles?.full_name}</span>
                   </p>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                   <button onClick={() => setSelectedCase(c)}
-                    className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-navy-800 border border-gray-200 hover:border-navy-300 px-3 py-1.5 rounded-lg transition-colors">
-                    <FileText className="w-3.5 h-3.5" /> Detay
+                    className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-500 hover:text-navy-800 border border-gray-200 hover:border-navy-300 px-2 sm:px-3 py-1.5 rounded-lg transition-colors">
+                    <FileText className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Detay</span>
                   </button>
                   <button onClick={() => { setEditingCase(c as Case); setShowModal(true); }}
-                    className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-navy-800 border border-gray-200 hover:border-navy-300 px-3 py-1.5 rounded-lg transition-colors">
-                    <Pencil className="w-3.5 h-3.5" /> Düzenle
+                    className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-500 hover:text-navy-800 border border-gray-200 hover:border-navy-300 px-2 sm:px-3 py-1.5 rounded-lg transition-colors">
+                    <Pencil className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Düzenle</span>
                   </button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4 pt-4 border-t border-gray-100">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
                 <div>
-                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">Duruşma Tarihi</p>
-                  <p className="text-gray-700 text-sm flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-gray-400" />
-                    {c.hearing_date ? new Date(c.hearing_date).toLocaleDateString('tr-TR') : '—'}
+                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1 hidden sm:block">Duruşma Tarihi</p>
+                  <p className="text-gray-400 text-xs mb-1 sm:hidden">Duruşma</p>
+                  <p className="text-gray-700 text-xs sm:text-sm flex items-center gap-1">
+                    <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gray-400 shrink-0" />
+                    <span className="truncate">{c.hearing_date ? new Date(c.hearing_date).toLocaleDateString('tr-TR') : '—'}</span>
                   </p>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">İcra Durumu</p>
-                  <p className="text-gray-700 text-sm">{c.execution_status || '—'}</p>
+                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1 hidden sm:block">İcra Durumu</p>
+                  <p className="text-gray-400 text-xs mb-1 sm:hidden">İcra</p>
+                  <p className="text-gray-700 text-xs sm:text-sm truncate">{c.execution_status || '—'}</p>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">Son Güncelleme</p>
-                  <p className="text-gray-700 text-sm">{new Date(c.last_updated).toLocaleDateString('tr-TR')}</p>
+                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1 hidden sm:block">Son Güncelleme</p>
+                  <p className="text-gray-400 text-xs mb-1 sm:hidden">Güncelleme</p>
+                  <p className="text-gray-700 text-xs sm:text-sm">{new Date(c.last_updated).toLocaleDateString('tr-TR')}</p>
                 </div>
               </div>
             </div>
@@ -282,20 +288,20 @@ function CaseDetailAdmin({ caseData, onBack }: DetailProps) {
 
   return (
     <div>
-      <button onClick={onBack} className="flex items-center gap-2 text-gray-500 hover:text-navy-800 text-sm mb-6 transition-colors">
+      <button onClick={onBack} className="flex items-center gap-2 text-gray-500 hover:text-navy-800 text-sm mb-5 sm:mb-6 transition-colors">
         <ArrowLeft className="w-4 h-4" /> Tüm davalara dön
       </button>
 
-      <div className="bg-navy-900 rounded-2xl p-6 mb-6">
-        <div className="flex items-start justify-between flex-wrap gap-4">
-          <div>
-            <span className="text-xs font-mono font-semibold text-gold-400 bg-gold-400/10 border border-gold-400/20 px-3 py-1 rounded-md mb-3 inline-block">{caseData.case_number}</span>
-            <h2 className="font-serif text-2xl text-white">{caseData.title}</h2>
-            <p className="text-white/50 text-sm mt-1">Müvekkil: {caseData.profiles?.full_name}</p>
+      <div className="bg-navy-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
+        <div className="flex items-start justify-between flex-wrap gap-3 sm:gap-4">
+          <div className="min-w-0 flex-1">
+            <span className="text-xs font-mono font-semibold text-gold-400 bg-gold-400/10 border border-gold-400/20 px-2.5 py-1 rounded-md mb-2 sm:mb-3 inline-block">{caseData.case_number}</span>
+            <h2 className="font-serif text-lg sm:text-2xl text-white leading-snug">{caseData.title}</h2>
+            <p className="text-white/50 text-sm mt-1 truncate">Müvekkil: {caseData.profiles?.full_name}</p>
           </div>
-          <div>
+          <div className="shrink-0">
             <p className="text-white/40 text-xs uppercase tracking-widest mb-1">Son Aşama</p>
-            <p className="text-gold-400 font-semibold">{caseData.current_stage || '—'}</p>
+            <p className="text-gold-400 font-semibold text-sm sm:text-base">{caseData.current_stage || '—'}</p>
           </div>
         </div>
       </div>
@@ -306,18 +312,20 @@ function CaseDetailAdmin({ caseData, onBack }: DetailProps) {
           { id: 'notes', label: `Notlar (${notes.length})`, icon: <MessageSquare className="w-4 h-4" /> },
         ] as const).map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === t.id ? 'bg-navy-800 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:border-navy-300'}`}>
-            {t.icon} {t.label}
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === t.id ? 'bg-navy-800 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:border-navy-300'}`}>
+            {t.icon} <span className="truncate">{t.label}</span>
           </button>
         ))}
       </div>
 
       {tab === 'docs' && (
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm">
-          <div className="flex items-center justify-between p-5 border-b border-gray-100">
-            <h3 className="font-semibold text-navy-800">Dava Dökümanları</h3>
-            <label className={`flex items-center gap-2 cursor-pointer bg-navy-800 hover:bg-navy-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors ${uploading ? 'opacity-50 pointer-events-none' : ''}`}>
-              <Upload className="w-4 h-4" /> {uploading ? 'Yükleniyor...' : 'Dosya Yükle'}
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm">
+          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-gray-100">
+            <h3 className="font-semibold text-navy-800 text-sm sm:text-base">Dava Dökümanları</h3>
+            <label className={`flex items-center gap-1.5 sm:gap-2 cursor-pointer bg-navy-800 hover:bg-navy-700 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${uploading ? 'opacity-50 pointer-events-none' : ''}`}>
+              <Upload className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{uploading ? 'Yükleniyor...' : 'Dosya Yükle'}</span>
+              <span className="sm:hidden">{uploading ? 'Yükleniyor...' : 'Yükle'}</span>
               <input type="file" className="hidden" onChange={handleUpload} disabled={uploading} />
             </label>
           </div>
@@ -329,18 +337,18 @@ function CaseDetailAdmin({ caseData, onBack }: DetailProps) {
           ) : (
             <div className="divide-y divide-gray-50">
               {documents.map(doc => (
-                <div key={doc.id} className="flex items-center gap-4 px-5 py-3.5">
-                  <FileText className="w-8 h-8 text-navy-300 shrink-0" />
+                <div key={doc.id} className="flex items-center gap-3 px-4 sm:px-5 py-3.5">
+                  <FileText className="w-7 h-7 sm:w-8 sm:h-8 text-navy-300 shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="text-navy-900 text-sm font-medium truncate">{doc.file_name}</p>
                     <p className="text-gray-400 text-xs">{fmt(doc.file_size)} · {new Date(doc.created_at).toLocaleDateString('tr-TR')}</p>
                   </div>
-                  <div className="flex gap-2 shrink-0">
+                  <div className="flex gap-1.5 sm:gap-2 shrink-0">
                     <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="p-1.5 text-navy-500 hover:text-navy-800 border border-gray-200 hover:border-navy-300 rounded-lg transition-colors">
-                      <FileText className="w-4 h-4" />
+                      <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </a>
                     <button onClick={() => deleteDoc(doc)} className="p-1.5 text-gray-400 hover:text-red-500 border border-gray-200 hover:border-red-200 rounded-lg transition-colors">
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </button>
                   </div>
                 </div>
@@ -351,25 +359,25 @@ function CaseDetailAdmin({ caseData, onBack }: DetailProps) {
       )}
 
       {tab === 'notes' && (
-        <div className="space-y-4">
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
-            <h3 className="font-semibold text-navy-800 mb-3">Not Ekle</h3>
+        <div className="space-y-3 sm:space-y-4">
+          <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-5">
+            <h3 className="font-semibold text-navy-800 mb-3 text-sm sm:text-base">Not Ekle</h3>
             <textarea value={noteText} onChange={e => setNoteText(e.target.value)} rows={3}
-              placeholder="Not içeriği..." className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 resize-none mb-3" />
-            <div className="flex items-center justify-between">
+              placeholder="Not içeriği..." className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 resize-none mb-3" />
+            <div className="flex items-center justify-between gap-3">
               <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600">
                 <input type="checkbox" checked={visibleToClient} onChange={e => setVisibleToClient(e.target.checked)} className="w-4 h-4 rounded" />
-                Müvekkile görünür
+                <span className="text-xs sm:text-sm">Müvekkile görünür</span>
               </label>
               <button onClick={addNote} disabled={addingNote || !noteText.trim()}
-                className="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white px-4 py-2 rounded-lg text-sm font-medium disabled:opacity-50 transition-colors">
+                className="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium disabled:opacity-50 transition-colors shrink-0">
                 {addingNote ? 'Ekleniyor...' : 'Not Ekle'}
               </button>
             </div>
           </div>
 
           {notes.map(note => (
-            <div key={note.id} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+            <div key={note.id} className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <p className="text-gray-700 text-sm leading-relaxed flex-1">{note.content}</p>
                 <div className="flex gap-1.5 shrink-0">
@@ -381,7 +389,7 @@ function CaseDetailAdmin({ caseData, onBack }: DetailProps) {
                   </button>
                 </div>
               </div>
-              <div className="flex items-center gap-3 mt-2">
+              <div className="flex items-center gap-3 mt-2 flex-wrap">
                 <span className={`text-xs px-2 py-0.5 rounded-full ${note.is_visible_to_client ? 'bg-green-50 text-green-600' : 'bg-gray-100 text-gray-500'}`}>
                   {note.is_visible_to_client ? 'Müvekkile görünür' : 'Sadece admin'}
                 </span>
@@ -391,7 +399,7 @@ function CaseDetailAdmin({ caseData, onBack }: DetailProps) {
           ))}
 
           {notes.length === 0 && (
-            <div className="bg-white rounded-2xl border border-gray-200 p-10 text-center">
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-10 text-center">
               <MessageSquare className="w-10 h-10 text-gray-200 mx-auto mb-2" />
               <p className="text-gray-400 text-sm">Henüz not eklenmemiş.</p>
             </div>

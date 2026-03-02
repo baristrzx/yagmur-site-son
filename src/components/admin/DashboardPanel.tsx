@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Briefcase, Users, MessageSquare, BookOpen, TrendingUp, Clock } from 'lucide-react';
+import { Briefcase, Users, MessageSquare, BookOpen, TrendingUp, Clock, ArrowRight } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import type { AdminView } from './AdminLayout';
 
@@ -39,10 +39,10 @@ export default function DashboardPanel({ onNavigate }: Props) {
   }, []);
 
   const statCards = [
-    { label: 'Aktif Dava', value: stats.cases, icon: <Briefcase className="w-6 h-6" />, color: 'bg-blue-50 text-blue-600', view: 'cases' as AdminView },
-    { label: 'Müvekkil', value: stats.clients, icon: <Users className="w-6 h-6" />, color: 'bg-green-50 text-green-600', view: 'clients' as AdminView },
-    { label: 'Okunmamış Mesaj', value: stats.unreadMessages, icon: <MessageSquare className="w-6 h-6" />, color: 'bg-red-50 text-red-600', view: 'messages' as AdminView },
-    { label: 'Blog Yazısı', value: stats.blogPosts, icon: <BookOpen className="w-6 h-6" />, color: 'bg-amber-50 text-amber-600', view: 'blog_list' as AdminView },
+    { label: 'Aktif Dava', value: stats.cases, icon: <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />, color: 'bg-blue-50 text-blue-600', view: 'cases' as AdminView },
+    { label: 'Müvekkil', value: stats.clients, icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />, color: 'bg-green-50 text-green-600', view: 'clients' as AdminView },
+    { label: 'Okunmamış', value: stats.unreadMessages, icon: <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />, color: 'bg-red-50 text-red-600', view: 'messages' as AdminView },
+    { label: 'Blog Yazısı', value: stats.blogPosts, icon: <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />, color: 'bg-amber-50 text-amber-600', view: 'blog_list' as AdminView },
   ];
 
   if (loading) return (
@@ -53,57 +53,60 @@ export default function DashboardPanel({ onNavigate }: Props) {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="font-serif text-2xl text-navy-900">Dashboard</h1>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="font-serif text-xl sm:text-2xl text-navy-900">Dashboard</h1>
         <p className="text-gray-500 text-sm mt-1">ANKH Legal yönetim paneline hoş geldiniz</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
         {statCards.map(card => (
           <button
             key={card.label}
             onClick={() => onNavigate(card.view)}
-            className="bg-white rounded-2xl border border-gray-200 p-5 text-left hover:shadow-md hover:border-navy-200 transition-all"
+            className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-4 sm:p-5 text-left hover:shadow-md hover:border-navy-200 transition-all active:scale-95"
           >
-            <div className={`inline-flex p-2.5 rounded-xl ${card.color} mb-3`}>
+            <div className={`inline-flex p-2 sm:p-2.5 rounded-lg sm:rounded-xl ${card.color} mb-2 sm:mb-3`}>
               {card.icon}
             </div>
-            <p className="text-3xl font-bold text-navy-900 font-serif">{card.value}</p>
-            <p className="text-gray-500 text-sm mt-1">{card.label}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-navy-900 font-serif">{card.value}</p>
+            <p className="text-gray-500 text-xs sm:text-sm mt-0.5 sm:mt-1">{card.label}</p>
           </button>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Clock className="w-5 h-5 text-navy-600" />
-            <h2 className="font-serif text-navy-900 text-lg">Son Davalar</h2>
+            <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-navy-600" />
+            <h2 className="font-serif text-navy-900 text-base sm:text-lg">Son Davalar</h2>
           </div>
           {recentCases.length === 0 ? (
             <p className="text-gray-400 text-sm text-center py-6">Henüz dava yok</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {recentCases.map(c => (
-                <div key={c.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
-                  <div>
-                    <p className="text-sm font-medium text-navy-800">{c.title}</p>
-                    <p className="text-xs text-gray-400">{c.case_number} · {c.profiles?.full_name}</p>
+                <div key={c.id} className="flex items-start sm:items-center justify-between py-2 border-b border-gray-50 last:border-0 gap-2">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-navy-800 truncate">{c.title}</p>
+                    <p className="text-xs text-gray-400 truncate">{c.case_number} · {c.profiles?.full_name}</p>
                   </div>
-                  <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full font-medium shrink-0 ml-2">
+                  <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full font-medium shrink-0 whitespace-nowrap">
                     {c.current_stage || '—'}
                   </span>
                 </div>
               ))}
             </div>
           )}
-          <button onClick={() => onNavigate('cases')} className="mt-4 text-sm text-navy-600 hover:text-navy-800 flex items-center gap-1 font-medium">
+          <button
+            onClick={() => onNavigate('cases')}
+            className="mt-4 text-sm text-navy-600 hover:text-navy-800 flex items-center gap-1 font-medium"
+          >
             <TrendingUp className="w-4 h-4" /> Tüm davaları gör
           </button>
         </div>
 
-        <div className="bg-navy-900 rounded-2xl p-6 text-white">
-          <h2 className="font-serif text-lg mb-4 text-gold-400">Hızlı Erişim</h2>
+        <div className="bg-navy-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-white">
+          <h2 className="font-serif text-base sm:text-lg mb-4 text-gold-400">Hızlı Erişim</h2>
           <div className="space-y-2">
             {[
               { label: 'Yeni dava oluştur', view: 'cases' as AdminView },
@@ -115,9 +118,10 @@ export default function DashboardPanel({ onNavigate }: Props) {
               <button
                 key={item.view}
                 onClick={() => onNavigate(item.view)}
-                className="w-full text-left px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors"
+                className="w-full text-left flex items-center justify-between px-3 sm:px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors group"
               >
-                {item.label}
+                <span>{item.label}</span>
+                <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
               </button>
             ))}
           </div>

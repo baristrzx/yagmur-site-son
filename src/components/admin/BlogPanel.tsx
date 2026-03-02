@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Plus, Pencil, X, BookOpen, Eye, EyeOff, BarChart2 } from 'lucide-react';
+import { Plus, Pencil, X, BookOpen, Eye, EyeOff, BarChart2, Calendar } from 'lucide-react';
 import { supabase, type BlogPost, type BlogCategory } from '../../lib/supabase';
 import RichTextEditor from './RichTextEditor';
 
@@ -100,36 +100,36 @@ export default function BlogPanel({ initialView = 'list' }: Props) {
 
   if (view === 'editor') return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <button onClick={() => setView('list')} className="text-gray-500 hover:text-navy-800 text-sm flex items-center gap-1.5 transition-colors">
-          ← Blog listesine dön
+      <div className="flex items-center justify-between mb-5 sm:mb-6 gap-3">
+        <button onClick={() => setView('list')} className="text-gray-500 hover:text-navy-800 text-sm flex items-center gap-1.5 transition-colors shrink-0">
+          ← <span className="hidden sm:inline">Blog listesine dön</span><span className="sm:hidden">Geri</span>
         </button>
         <div className="flex gap-2">
           <button onClick={() => setLang('tr')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${lang === 'tr' ? 'bg-navy-800 text-white' : 'text-gray-500 border border-gray-200'}`}>TR</button>
           <button onClick={() => setLang('en')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${lang === 'en' ? 'bg-navy-800 text-white' : 'text-gray-500 border border-gray-200'}`}>EN</button>
         </div>
       </div>
-      <form onSubmit={handleSave} className="space-y-5">
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-          <h2 className="font-serif text-xl text-navy-900 mb-5">{editing ? 'Yazıyı Düzenle' : 'Yeni Blog Yazısı'}</h2>
+      <form onSubmit={handleSave} className="space-y-4 sm:space-y-5">
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-6">
+          <h2 className="font-serif text-lg sm:text-xl text-navy-900 mb-4 sm:mb-5">{editing ? 'Yazıyı Düzenle' : 'Yeni Blog Yazısı'}</h2>
           <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">Başlık ({lang.toUpperCase()})</label>
                 <input type="text" value={lang === 'tr' ? form.title_tr : form.title_en}
                   onChange={e => { const v = e.target.value; setForm(p => lang === 'tr' ? { ...p, title_tr: v, slug: !editing ? generateSlug(v) : p.slug } : { ...p, title_en: v }); }}
-                  required={lang === 'tr'} className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400" />
+                  required={lang === 'tr'} className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400" />
               </div>
               <div>
                 <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">Slug (URL)</label>
-                <input type="text" value={form.slug} onChange={e => setForm(p => ({ ...p, slug: e.target.value }))} required className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 font-mono" />
+                <input type="text" value={form.slug} onChange={e => setForm(p => ({ ...p, slug: e.target.value }))} required className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 font-mono" />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">Kategori</label>
                 <select value={form.category_id || ''} onChange={e => setForm(p => ({ ...p, category_id: e.target.value || null }))}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 bg-white">
+                  className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 bg-white">
                   <option value="">Kategori seçin...</option>
                   {categories.map(c => <option key={c.id} value={c.id}>{c.name_tr}</option>)}
                 </select>
@@ -137,14 +137,14 @@ export default function BlogPanel({ initialView = 'list' }: Props) {
               <div>
                 <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">Kapak Görseli URL</label>
                 <input type="text" value={form.cover_image} onChange={e => setForm(p => ({ ...p, cover_image: e.target.value }))}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400" placeholder="https://images.pexels.com/..." />
+                  className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400" placeholder="https://images.pexels.com/..." />
               </div>
             </div>
             <div>
               <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">Özet ({lang.toUpperCase()})</label>
               <textarea value={lang === 'tr' ? form.excerpt_tr : form.excerpt_en}
                 onChange={e => setForm(p => lang === 'tr' ? { ...p, excerpt_tr: e.target.value } : { ...p, excerpt_en: e.target.value })}
-                rows={2} className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 resize-none" />
+                rows={2} className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 resize-none" />
             </div>
             <div>
               <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">İçerik ({lang.toUpperCase()})</label>
@@ -165,23 +165,23 @@ export default function BlogPanel({ initialView = 'list' }: Props) {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
           <button type="button" onClick={() => setSeoOpen(!seoOpen)}
-            className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors">
+            className="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-gray-50 transition-colors">
             <div>
               <p className="font-semibold text-navy-800 text-sm">SEO Meta Bilgileri</p>
               <p className="text-gray-400 text-xs mt-0.5">Arama motoru başlığı ve açıklaması</p>
             </div>
-            <span className="text-gray-400 text-xs">{seoOpen ? '▲ Kapat' : '▼ Genişlet'}</span>
+            <span className="text-gray-400 text-xs shrink-0 ml-2">{seoOpen ? '▲ Kapat' : '▼ Genişlet'}</span>
           </button>
           {seoOpen && (
-            <div className="p-5 pt-0 space-y-4 border-t border-gray-100">
+            <div className="p-4 sm:p-5 pt-0 space-y-4 border-t border-gray-100">
               <div>
                 <label className="block text-gray-600 text-xs uppercase tracking-widest mb-2">Meta Başlık ({lang.toUpperCase()})</label>
                 <input type="text" maxLength={60}
                   value={lang === 'tr' ? form.meta_title_tr : form.meta_title_en}
                   onChange={e => setForm(p => lang === 'tr' ? { ...p, meta_title_tr: e.target.value } : { ...p, meta_title_en: e.target.value })}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400" placeholder="60 karaktere kadar..." />
+                  className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400" placeholder="60 karaktere kadar..." />
                 <p className="text-gray-400 text-xs mt-1">
                   {(lang === 'tr' ? form.meta_title_tr : form.meta_title_en).length}/60 karakter
                 </p>
@@ -191,7 +191,7 @@ export default function BlogPanel({ initialView = 'list' }: Props) {
                 <textarea maxLength={160}
                   value={lang === 'tr' ? form.meta_description_tr : form.meta_description_en}
                   onChange={e => setForm(p => lang === 'tr' ? { ...p, meta_description_tr: e.target.value } : { ...p, meta_description_en: e.target.value })}
-                  rows={3} className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 resize-none" placeholder="160 karaktere kadar..." />
+                  rows={3} className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-navy-400 resize-none" placeholder="160 karaktere kadar..." />
                 <p className="text-gray-400 text-xs mt-1">
                   {(lang === 'tr' ? form.meta_description_tr : form.meta_description_en).length}/160 karakter
                 </p>
@@ -212,13 +212,13 @@ export default function BlogPanel({ initialView = 'list' }: Props) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-5 sm:mb-6">
         <div>
-          <h1 className="font-serif text-2xl text-navy-900">Blog Yazıları</h1>
+          <h1 className="font-serif text-xl sm:text-2xl text-navy-900">Blog Yazıları</h1>
           <p className="text-gray-500 text-sm mt-1">{posts.length} yazı</p>
         </div>
-        <button onClick={openNew} className="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors">
-          <Plus className="w-4 h-4" /> Yeni Yazı
+        <button onClick={openNew} className="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-sm font-medium transition-colors whitespace-nowrap">
+          <Plus className="w-4 h-4" /> <span className="hidden sm:inline">Yeni Yazı</span><span className="sm:hidden">Yeni</span>
         </button>
       </div>
       {loading ? (
@@ -229,67 +229,115 @@ export default function BlogPanel({ initialView = 'list' }: Props) {
           <p className="text-gray-500">Henüz blog yazısı eklenmemiş.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-gray-50 border-b border-gray-100">
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest">Başlık</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest hidden md:table-cell">Kategori</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest hidden sm:table-cell">Durum</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest hidden lg:table-cell">Görüntülenme</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest hidden lg:table-cell">Tarih</th>
-                <th className="px-5 py-3"></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50">
-              {posts.map(p => (
-                <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-3">
-                      {p.cover_image && (
-                        <img src={p.cover_image} alt={p.title_tr} className="w-10 h-10 rounded-lg object-cover shrink-0 hidden sm:block" />
-                      )}
-                      <div className="min-w-0">
-                        <p className="text-navy-900 text-sm font-medium truncate max-w-xs">{p.title_tr}</p>
-                        <p className="text-gray-400 text-xs font-mono truncate max-w-xs">{p.slug}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-5 py-3.5 text-gray-600 text-sm hidden md:table-cell">
-                    {p.blog_categories?.name_tr || <span className="text-gray-300">—</span>}
-                  </td>
-                  <td className="px-5 py-3.5 hidden sm:table-cell">
-                    <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${p.is_published ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
-                      {p.is_published ? 'Yayında' : 'Taslak'}
-                    </span>
-                  </td>
-                  <td className="px-5 py-3.5 hidden lg:table-cell">
-                    <div className="flex items-center gap-1.5 text-gray-500 text-sm">
-                      <BarChart2 className="w-3.5 h-3.5 text-gray-400" />
-                      {p.view_count || 0}
-                    </div>
-                  </td>
-                  <td className="px-5 py-3.5 text-gray-400 text-xs hidden lg:table-cell">
-                    {new Date(p.created_at).toLocaleDateString('tr-TR')}
-                  </td>
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-1.5 justify-end">
-                      <button onClick={() => togglePublish(p)} className={`p-1.5 rounded-lg border transition-colors ${p.is_published ? 'text-orange-500 border-orange-200 hover:bg-orange-50' : 'text-green-500 border-green-200 hover:bg-green-50'}`} title={p.is_published ? 'Yayından Kaldır' : 'Yayınla'}>
-                        {p.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
-                      <button onClick={() => openEdit(p)} className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-navy-800 hover:border-navy-300 transition-colors">
-                        <Pencil className="w-4 h-4" />
-                      </button>
-                      <button onClick={() => handleDelete(p.id)} className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-200 transition-colors">
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </td>
+        <>
+          <div className="hidden sm:block bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-100">
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest">Başlık</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest hidden md:table-cell">Kategori</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest">Durum</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest hidden lg:table-cell">Görüntülenme</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-widest hidden lg:table-cell">Tarih</th>
+                  <th className="px-5 py-3"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {posts.map(p => (
+                  <tr key={p.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-3">
+                        {p.cover_image && (
+                          <img src={p.cover_image} alt={p.title_tr} className="w-10 h-10 rounded-lg object-cover shrink-0" />
+                        )}
+                        <div className="min-w-0">
+                          <p className="text-navy-900 text-sm font-medium truncate max-w-[200px] lg:max-w-xs">{p.title_tr}</p>
+                          <p className="text-gray-400 text-xs font-mono truncate max-w-[200px] lg:max-w-xs">{p.slug}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-5 py-3.5 text-gray-600 text-sm hidden md:table-cell">
+                      {p.blog_categories?.name_tr || <span className="text-gray-300">—</span>}
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${p.is_published ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                        {p.is_published ? 'Yayında' : 'Taslak'}
+                      </span>
+                    </td>
+                    <td className="px-5 py-3.5 hidden lg:table-cell">
+                      <div className="flex items-center gap-1.5 text-gray-500 text-sm">
+                        <BarChart2 className="w-3.5 h-3.5 text-gray-400" />
+                        {p.view_count || 0}
+                      </div>
+                    </td>
+                    <td className="px-5 py-3.5 text-gray-400 text-xs hidden lg:table-cell">
+                      {new Date(p.created_at).toLocaleDateString('tr-TR')}
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-1.5 justify-end">
+                        <button onClick={() => togglePublish(p)} className={`p-1.5 rounded-lg border transition-colors ${p.is_published ? 'text-orange-500 border-orange-200 hover:bg-orange-50' : 'text-green-500 border-green-200 hover:bg-green-50'}`} title={p.is_published ? 'Yayından Kaldır' : 'Yayınla'}>
+                          {p.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                        <button onClick={() => openEdit(p)} className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-navy-800 hover:border-navy-300 transition-colors">
+                          <Pencil className="w-4 h-4" />
+                        </button>
+                        <button onClick={() => handleDelete(p.id)} className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-200 transition-colors">
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="sm:hidden space-y-3">
+            {posts.map(p => (
+              <div key={p.id} className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                <div className="flex items-start gap-3 mb-3">
+                  {p.cover_image && (
+                    <img src={p.cover_image} alt={p.title_tr} className="w-14 h-14 rounded-lg object-cover shrink-0" />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-navy-900 text-sm font-semibold leading-snug mb-1">{p.title_tr}</p>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${p.is_published ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                        {p.is_published ? 'Yayında' : 'Taslak'}
+                      </span>
+                      {p.blog_categories?.name_tr && (
+                        <span className="text-xs text-gray-500">{p.blog_categories.name_tr}</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <div className="flex items-center gap-3 text-xs text-gray-400">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {new Date(p.created_at).toLocaleDateString('tr-TR')}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <BarChart2 className="w-3 h-3" />
+                      {p.view_count || 0}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <button onClick={() => togglePublish(p)} className={`p-1.5 rounded-lg border transition-colors ${p.is_published ? 'text-orange-500 border-orange-200' : 'text-green-500 border-green-200'}`}>
+                      {p.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                    <button onClick={() => openEdit(p)} className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-navy-800 transition-colors">
+                      <Pencil className="w-4 h-4" />
+                    </button>
+                    <button onClick={() => handleDelete(p.id)} className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-red-500 transition-colors">
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

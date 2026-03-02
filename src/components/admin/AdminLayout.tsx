@@ -2,8 +2,7 @@ import { useState } from 'react';
 import {
   Scale, Users, Briefcase, LogOut, Menu, X, ChevronDown, ChevronRight,
   BookOpen, UserCheck, Star, MessageSquare, Settings,
-  Shield, Globe, LayoutDashboard, FileText, PenSquare, Home, Info,
-  Handshake, Phone, FileLock, Cookie, FileWarning, Pencil
+  Shield, LayoutDashboard, FileText, PenSquare, Pencil
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -163,10 +162,10 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
   function SidebarContent() {
     return (
       <div className="w-64 bg-[#0d1b2a] flex flex-col h-full min-h-screen">
-        <div className="p-5 border-b border-white/10">
+        <div className="p-4 sm:p-5 border-b border-white/10">
           <div className="flex items-center gap-3">
             <a href="/" className="flex items-center gap-3 group">
-              <img src="/image.png" alt="ANKH Legal" className="h-10 w-auto object-contain group-hover:opacity-80 transition-opacity" />
+              <img src="/image.png" alt="ANKH Legal" className="h-9 sm:h-10 w-auto object-contain group-hover:opacity-80 transition-opacity" />
               <span className="text-amber-400 text-xs font-semibold tracking-widest uppercase group-hover:text-amber-300 transition-colors">Admin</span>
             </a>
           </div>
@@ -187,9 +186,9 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
                       : 'text-white/55 hover:text-white/90 hover:bg-white/5'}`}
                 >
                   {leaf.icon}
-                  <span className="flex-1 text-left">{leaf.label}</span>
+                  <span className="flex-1 text-left truncate">{leaf.label}</span>
                   {leaf.badge && leaf.badge > 0 ? (
-                    <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+                    <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center shrink-0">
                       {leaf.badge}
                     </span>
                   ) : active ? (
@@ -213,9 +212,9 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
                       : 'text-white/55 hover:text-white/90 hover:bg-white/5'}`}
                 >
                   {group.icon}
-                  <span className="flex-1 text-left">{group.label}</span>
+                  <span className="flex-1 text-left truncate">{group.label}</span>
                   {group.badge && group.badge > 0 ? (
-                    <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center mr-1">
+                    <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center mr-1 shrink-0">
                       {group.badge}
                     </span>
                   ) : null}
@@ -238,7 +237,7 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
                               : 'text-white/45 hover:text-white/80 hover:bg-white/5'}`}
                         >
                           {child.icon}
-                          <span className="flex-1 text-left">{child.label}</span>
+                          <span className="flex-1 text-left truncate">{child.label}</span>
                           {active && <ChevronRight className="w-3 h-3 shrink-0" />}
                         </button>
                       );
@@ -250,7 +249,7 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
           })}
         </nav>
 
-        <div className="p-4 border-t border-white/10">
+        <div className="p-3 sm:p-4 border-t border-white/10">
           <div className="flex items-center gap-3 px-3 py-2 mb-2">
             <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 text-xs font-bold uppercase shrink-0">
               {profile?.full_name?.charAt(0) || 'A'}
@@ -264,8 +263,8 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
             onClick={signOut}
             className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-white/45 hover:text-white/80 hover:bg-white/5 transition-colors text-sm"
           >
-            <LogOut className="w-4 h-4" />
-            Çıkış Yap
+            <LogOut className="w-4 h-4 shrink-0" />
+            <span>Çıkış Yap</span>
           </button>
         </div>
       </div>
@@ -275,13 +274,19 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {mobileOpen && (
-        <div className="fixed inset-0 bg-black/60 z-40 lg:hidden" onClick={() => setMobileOpen(false)} />
+        <div
+          className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+        />
       )}
 
       {mobileOpen && (
-        <div className="fixed inset-y-0 left-0 z-50 lg:hidden">
+        <div className="fixed inset-y-0 left-0 z-50 lg:hidden shadow-2xl">
           <div className="relative h-full">
-            <button onClick={() => setMobileOpen(false)} className="absolute top-4 right-4 text-white/40 hover:text-white z-10">
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="absolute top-3.5 right-3 text-white/40 hover:text-white z-10 p-1 rounded-lg hover:bg-white/10 transition-colors"
+            >
               <X className="w-5 h-5" />
             </button>
             <SidebarContent />
@@ -295,21 +300,24 @@ export default function AdminLayout({ view, onViewChange, children, unreadMessag
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col min-w-0">
-        <header className="bg-white border-b border-gray-200 px-5 py-3.5 flex items-center gap-4 lg:hidden sticky top-0 z-30">
-          <button onClick={() => setMobileOpen(true)} className="text-gray-600 hover:text-gray-900">
-            <Menu className="w-6 h-6" />
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3 lg:hidden sticky top-0 z-30 shadow-sm">
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="text-gray-600 hover:text-gray-900 p-1 -ml-1 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <Menu className="w-5 h-5" />
           </button>
-          <p className="font-serif text-navy-800 font-semibold text-sm">
+          <p className="font-serif text-navy-800 font-semibold text-sm truncate flex-1">
             {getViewLabel(view)}
           </p>
           {unreadMessages > 0 && view !== 'messages' && (
-            <span className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+            <span className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shrink-0">
               {unreadMessages}
             </span>
           )}
         </header>
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto p-4 sm:p-6">
           {children}
         </main>
       </div>
