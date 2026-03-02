@@ -87,17 +87,51 @@ export default function Contact() {
             transition={{ duration: 0.7, delay: 0.25 }}
             className="rounded-2xl overflow-hidden h-full min-h-[420px] flex flex-col shadow-md border border-gray-100"
           >
-            <div className="flex-1 relative min-h-[360px]">
-              <iframe
-                title="ANKH Legal Konum"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=29.1150%2C36.6470%2C29.1310%2C36.6630&layer=mapnik&marker=36.6553%2C29.1228"
-                width="100%"
-                height="100%"
-                style={{ border: 0, position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div className="flex-1 relative min-h-[360px] group cursor-pointer overflow-hidden">
+              <a
+                href="https://maps.app.goo.gl/Cp77Y56HyycVvpJWA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full h-full"
+              >
+                <img
+                  src={`https://maps.googleapis.com/maps/api/staticmap?center=36.6553,29.1228&zoom=16&size=800x400&maptype=roadmap&markers=color:red%7C36.6553,29.1228&style=feature:all|element:labels.text.fill|color:0x4a5568&style=feature:road|element:geometry|color:0xffffff&style=feature:water|element:geometry|color:0xc8d7e8&style=feature:landscape|element:geometry|color:0xf5f5f0`}
+                  alt="ANKH Legal Ofis Konumu"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                    const parent = target.parentElement?.parentElement;
+                    if (parent) {
+                      parent.style.background = 'linear-gradient(135deg, #1a2744 0%, #243058 50%, #1a2744 100%)';
+                    }
+                  }}
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-navy-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <MapPin size={40} className="text-gold-400 mb-3" />
+                  <p className="text-white font-semibold font-sans text-base">Haritada Görüntüle</p>
+                  <p className="text-white/60 font-sans text-sm mt-1">Google Maps'te aç</p>
+                </div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+                  style={{ background: 'linear-gradient(135deg, #1a2744 0%, #243058 40%, #1e3a5f 100%)' }}
+                >
+                  <div className="relative">
+                    <div className="w-24 h-24 rounded-full border-2 border-gold-500/30 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full border-2 border-gold-500/50 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-gold-500 flex items-center justify-center">
+                          <MapPin size={16} className="text-navy-900" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-gold-400 animate-ping" />
+                  </div>
+                  <p className="text-white font-semibold font-sans text-base mt-5">Foça Mah. 983. Sok. No: 18/2</p>
+                  <p className="text-white/60 font-sans text-sm mt-1">Fethiye / MUĞLA</p>
+                  <div className="mt-4 px-4 py-2 border border-gold-500/50 rounded-lg">
+                    <p className="text-gold-400 text-xs font-sans font-medium">Google Maps'te Görüntüle</p>
+                  </div>
+                </div>
+              </a>
             </div>
             <div className="bg-navy-800 px-5 py-3.5 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
