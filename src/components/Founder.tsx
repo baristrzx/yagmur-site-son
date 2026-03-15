@@ -51,23 +51,23 @@ function Founder() {
               </div>
             </div>
 
-            <p className="text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
+            <p className="text-gray-600 leading-relaxed font-sans text-base md:text-[1.03rem] text-justify">
               Av. Arb. Yağmur Koçak Arat, dava yönetimi ve stratejik uyuşmazlık çözümü alanında
               uzmanlaşmış bir hukukçudur.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
+            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-base md:text-[1.03rem] text-justify">
               Çalışma modeli; yargısal süreci, müzakere dinamiklerini ve arabuluculuk
               mekanizmalarını birlikte değerlendiren bütüncül bir yaklaşıma dayanır. Her
               uyuşmazlık, dava perspektifi ile analiz edilir; çözüm yolu ise dosyanın niteliğine
               göre belirlenir.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
+            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-base md:text-[1.03rem] text-justify">
               Ticari, sigorta ve iş hukuku kaynaklı ihtilaflarda hem temsil hem arabuluculuk
               faaliyetleri yürütmekte; hukuki risk ile ekonomik sonuç arasındaki dengeyi esas
               almaktadır. Dava süreçlerinde disiplinli ve kararlı, müzakerede stratejik ve hesaplı,
               arabuluculukta ise çözüm odaklıdır.
             </p>
-            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-[1.03rem] text-justify">
+            <p className="mt-4 text-gray-600 leading-relaxed font-sans text-base md:text-[1.03rem] text-justify">
               ANKH Legal'i, yalnızca uyuşmazlık takip eden değil; uyuşmazlığı yöneten bir hukuk
               anlayışı üzerine kurmuştur.
             </p>
@@ -79,7 +79,7 @@ function Founder() {
                 <div className="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center flex-shrink-0">
                   <c.icon size={15} className="text-gold-400" />
                 </div>
-                <span className="text-gray-700 text-sm font-sans font-medium">{c.label}</span>
+                <span className="text-gray-700 text-sm md:text-base font-sans font-medium">{c.label}</span>
               </div>
             ))}
           </div>

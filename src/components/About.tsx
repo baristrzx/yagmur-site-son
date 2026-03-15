@@ -55,21 +55,21 @@ function About() {
 
           <div className="grid lg:grid-cols-[1fr,400px] gap-12 items-start">
             <motion.div variants={itemVariants}>
-              <p className="text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
+              <p className="text-gray-600 leading-relaxed text-base md:text-[1.05rem] font-sans text-justify">
                 ANKH Legal, stratejik dava yönetimi ve yüksek nitelikli hukuki danışmanlık sunmak
                 amacıyla kurulmuş bir hukuk ofisidir.
               </p>
-              <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
+              <p className="mt-4 text-gray-600 leading-relaxed text-base md:text-[1.05rem] font-sans text-justify">
                 Hukuki meseleleri yalnızca yargısal süreçler olarak değil; risk analizi, güç dengesi
                 ve uzun vadeli hukuki güvenlik perspektifiyle ele alır. Her dosya, kapsamlı bir ön
                 değerlendirmeye tabi tutulur; sürecin başında net bir yol haritası oluşturulur ve
                 temsil buna göre yapılandırılır.
               </p>
-              <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
+              <p className="mt-4 text-gray-600 leading-relaxed text-base md:text-[1.05rem] font-sans text-justify">
                 Yaklaşımımız reaktif değil, öngörülüdür. Amaç yalnızca bir uyuşmazlığı
                 sonuçlandırmak değil; müvekkilin hukuki pozisyonunu güçlendirmektir.
               </p>
-              <p className="mt-4 text-gray-600 leading-relaxed text-[1.05rem] font-sans text-justify">
+              <p className="mt-4 text-gray-600 leading-relaxed text-base md:text-[1.05rem] font-sans text-justify">
                 ANKH Legal, bireyler, aile işletmeleri ve şirketler için karmaşık hukuki süreçleri
                 sistemli, disiplinli ve sonuç odaklı bir anlayışla yönetir. Türkiye merkezli olmakla
                 birlikte uluslararası bağlantılı hukuki işlemler ve yabancı müvekkillerle çalışma
@@ -99,7 +99,7 @@ function About() {
                   </div>
                   <div>
                     <h3 className="font-serif text-lg font-semibold text-navy-800 mb-1">{p.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed font-sans">{p.desc}</p>
+                    <p className="text-gray-500 text-sm md:text-base leading-relaxed font-sans">{p.desc}</p>
                   </div>
                 </motion.div>
               ))}

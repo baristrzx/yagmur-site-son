@@ -144,7 +144,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white p-2 -mr-1 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500/50"
+          className="md:hidden text-white p-3 -mr-1 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500/50 min-w-[44px] min-h-[44px] flex items-center justify-center"
           aria-label={menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
           aria-expanded={menuOpen}
         >
@@ -180,7 +180,7 @@ export default function Navbar() {
                       key={i}
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center py-2.5 px-3 rounded-lg text-sm transition-colors ${
+                      className={`flex items-center min-h-[44px] py-3 px-3 rounded-lg text-sm transition-colors ${
                         item.muted
                           ? 'text-white/30 italic text-xs'
                           : 'text-white/65 hover:text-gold-400 hover:bg-white/5'
@@ -201,7 +201,7 @@ export default function Navbar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className="text-white/80 hover:text-gold-400 hover:bg-white/5 text-sm font-medium py-3 px-3 rounded-lg transition-colors border-b border-white/5"
+                    className="text-white/80 hover:text-gold-400 hover:bg-white/5 text-sm font-medium min-h-[44px] py-3 px-3 rounded-lg transition-colors border-b border-white/5 flex items-center"
                   >
                     {item.label}
                   </a>
@@ -210,7 +210,7 @@ export default function Navbar() {
                 <a
                   href="/client-panel"
                   onClick={() => setMenuOpen(false)}
-                  className="mt-2 px-5 py-3 border border-white/20 text-white/70 hover:text-white hover:border-white/40 text-sm font-medium rounded-lg text-center transition-colors"
+                  className="mt-2 px-5 py-3 min-h-[44px] border border-white/20 text-white/70 hover:text-white hover:border-white/40 text-sm font-medium rounded-lg text-center transition-colors flex items-center justify-center"
                 >
                   Müvekkil Paneli
                 </a>

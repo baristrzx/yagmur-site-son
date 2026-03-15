@@ -41,7 +41,7 @@ function KnowledgeCenter() {
             Bilgi Merkezi
           </h2>
           <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
-          <p className="mt-6 text-gray-500 max-w-xl mx-auto text-[1.02rem] leading-relaxed font-sans">
+          <p className="mt-6 text-gray-500 max-w-xl mx-auto text-base md:text-[1.02rem] leading-relaxed font-sans">
             Hukuki gelişmeler, içtihat analizleri ve stratejik rehberlik için kapsamlı kaynaklar.
           </p>
         </motion.div>

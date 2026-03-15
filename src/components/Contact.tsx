@@ -47,7 +47,7 @@ function Contact() {
             Bizimle İletişime Geçin
           </h2>
           <div className="mt-3 w-16 h-1 bg-gold-500 rounded-full mx-auto" />
-          <p className="mt-6 text-gray-500 max-w-xl mx-auto font-sans text-[1.03rem] leading-relaxed">
+          <p className="mt-6 text-gray-500 max-w-xl mx-auto font-sans text-base md:text-[1.03rem] leading-relaxed">
             Hukuki süreçlerinizde size özel stratejik danışmanlık için randevu alın.
           </p>
         </motion.div>
