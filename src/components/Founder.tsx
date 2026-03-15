@@ -36,6 +36,8 @@ function Founder() {
                 <img
                   src="/WhatsApp_Image_2026-02-26_at_14.25.27.jpeg"
                   alt="Av. Arb. Yağmur Koçak Arat"
+                  width="288"
+                  height="384"
                   className="w-full h-auto object-cover"
                   loading="lazy"
                 />

@@ -5,11 +5,13 @@ import { ArrowDown } from 'lucide-react';
 function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-navy-800">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
-        style={{
-          backgroundImage: "url('/WhatsApp_Image_2026-02-24_at_15.37.40.jpeg')",
-        }}
+      <img
+        src="/WhatsApp_Image_2026-02-24_at_15.37.40.jpeg"
+        alt=""
+        width="1920"
+        height="1080"
+        className="absolute inset-0 w-full h-full object-cover opacity-60"
+        fetchpriority="high"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-900/50 via-navy-900/60 to-navy-900/85" />
 

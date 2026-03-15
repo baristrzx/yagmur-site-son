@@ -98,6 +98,8 @@ function Contact() {
                 <img
                   src={`https://maps.googleapis.com/maps/api/staticmap?center=36.6553,29.1228&zoom=16&size=800x400&maptype=roadmap&markers=color:red%7C36.6553,29.1228&style=feature:all|element:labels.text.fill|color:0x4a5568&style=feature:road|element:geometry|color:0xffffff&style=feature:water|element:geometry|color:0xc8d7e8&style=feature:landscape|element:geometry|color:0xf5f5f0`}
                   alt="ANKH Legal Ofis Konumu"
+                  width="800"
+                  height="400"
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.currentTarget;

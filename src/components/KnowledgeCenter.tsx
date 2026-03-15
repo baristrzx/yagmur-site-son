@@ -81,6 +81,8 @@ function KnowledgeCenter() {
                     <img
                       src={post.cover_image}
                       alt={post.title_tr}
+                      width="400"
+                      height="400"
                       className="w-full h-full object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500"
                       loading="lazy"
                     />

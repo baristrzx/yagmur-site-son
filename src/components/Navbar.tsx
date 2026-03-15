@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { debounce } from '../lib/debounce';
 
 const expertiseItems = [
   { label: 'Kurumsal Hukuk ve Stratejik Danışmanlık', href: '#expertise' },
@@ -16,8 +17,8 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = debounce(() => setScrolled(window.scrollY > 40), 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -51,7 +52,10 @@ export default function Navbar() {
           <img
             src="/Ekran_Resmi_2026-02-26_21.00.58.png"
             alt="ANKH Legal"
+            width="200"
+            height="56"
             className="h-10 sm:h-14 w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
+            fetchpriority="high"
           />
         </a>
 
