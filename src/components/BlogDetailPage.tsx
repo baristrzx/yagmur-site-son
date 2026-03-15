@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeft, Calendar, Tag, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { supabase, type BlogPost, type BlogCategory } from '../lib/supabase';
+import SEOHead from './SEOHead';
 
 type PostWithCategory = BlogPost & { blog_categories: BlogCategory | null };
 
@@ -73,7 +74,17 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
   const readingTime = post.content_tr ? Math.ceil(post.content_tr.split(' ').length / 200) : 5;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <SEOHead
+        title={`${post.title_tr} | ANKH Legal Blog`}
+        description={post.excerpt_tr || post.meta_description_tr || post.title_tr}
+        keywords={post.meta_keywords_tr || undefined}
+        ogType="article"
+        ogImage={post.cover_image || '/image.png'}
+        lang="tr"
+        canonicalUrl={`${window.location.origin}/blog/${slug}`}
+      />
+      <div className="min-h-screen bg-gray-50">
       <div className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <button
@@ -239,6 +250,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }

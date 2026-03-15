@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { supabase, type LegalPage as LegalPageType } from '../lib/supabase';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import SEOHead from './SEOHead';
 
 export default function LegalPage({ slug }: { slug: string }) {
   const [page, setPage] = useState<LegalPageType | null>(null);
@@ -64,8 +65,16 @@ export default function LegalPage({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <>
+      <SEOHead
+        title={`${page.title_tr} | ANKH Legal`}
+        description={page.meta_description_tr || page.title_tr}
+        keywords={page.meta_keywords_tr || undefined}
+        lang="tr"
+        canonicalUrl={`${window.location.origin}/${slug}`}
+      />
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
 
       <div className="bg-navy-900 py-16 px-6">
         <div className="max-w-4xl mx-auto">
@@ -104,7 +113,8 @@ export default function LegalPage({ slug }: { slug: string }) {
         </div>
       </article>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }

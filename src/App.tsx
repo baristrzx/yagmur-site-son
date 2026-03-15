@@ -9,6 +9,7 @@ import KnowledgeCenter from './components/KnowledgeCenter';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import SEOHead from './components/SEOHead';
 
 const AdminLoginPage = lazy(() => import('./components/admin/AdminLoginPage'));
 const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard'));
@@ -38,17 +39,71 @@ function AppContent() {
   if (loading) return <Spinner />;
 
   if (isAdminPath) {
-    if (!user) return <Suspense fallback={<Spinner />}><AdminLoginPage /></Suspense>;
+    if (!user) return (
+      <>
+        <SEOHead
+          title="Admin Girişi | ANKH Legal"
+          description="ANKH Legal yönetim paneli giriş sayfası"
+          lang="tr"
+        />
+        <Suspense fallback={<Spinner />}><AdminLoginPage /></Suspense>
+      </>
+    );
     if (!profile) return <Spinner />;
-    if (profile.role !== 'admin') return <Suspense fallback={<Spinner />}><AdminLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." /></Suspense>;
-    return <Suspense fallback={<Spinner />}><AdminDashboard /></Suspense>;
+    if (profile.role !== 'admin') return (
+      <>
+        <SEOHead
+          title="Yetkisiz Erişim | ANKH Legal"
+          description="Bu sayfaya erişim yetkiniz bulunmuyor"
+          lang="tr"
+        />
+        <Suspense fallback={<Spinner />}><AdminLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." /></Suspense>
+      </>
+    );
+    return (
+      <>
+        <SEOHead
+          title="Yönetim Paneli | ANKH Legal"
+          description="ANKH Legal yönetim paneli"
+          lang="tr"
+        />
+        <Suspense fallback={<Spinner />}><AdminDashboard /></Suspense>
+      </>
+    );
   }
 
   if (isClientPath) {
-    if (!user) return <Suspense fallback={<Spinner />}><ClientLoginPage /></Suspense>;
+    if (!user) return (
+      <>
+        <SEOHead
+          title="Müvekkil Girişi | ANKH Legal"
+          description="ANKH Legal müvekkil paneli giriş sayfası"
+          lang="tr"
+        />
+        <Suspense fallback={<Spinner />}><ClientLoginPage /></Suspense>
+      </>
+    );
     if (!profile) return <Spinner />;
-    if (profile.role !== 'client') return <Suspense fallback={<Spinner />}><ClientLoginPage /></Suspense>;
-    return <Suspense fallback={<Spinner />}><ClientDashboard /></Suspense>;
+    if (profile.role !== 'client') return (
+      <>
+        <SEOHead
+          title="Müvekkil Girişi | ANKH Legal"
+          description="ANKH Legal müvekkil paneli giriş sayfası"
+          lang="tr"
+        />
+        <Suspense fallback={<Spinner />}><ClientLoginPage /></Suspense>
+      </>
+    );
+    return (
+      <>
+        <SEOHead
+          title="Müvekkil Paneli | ANKH Legal"
+          description="ANKH Legal müvekkil dava takip paneli"
+          lang="tr"
+        />
+        <Suspense fallback={<Spinner />}><ClientDashboard /></Suspense>
+      </>
+    );
   }
 
   if (isBlogPath) {
@@ -62,19 +117,28 @@ function AppContent() {
   }
 
   return (
-    <div className="font-sans antialiased">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Expertise />
-        <Founder />
-        <KnowledgeCenter />
-        <Contact />
-      </main>
-      <Footer />
-      <WhatsAppButton />
-    </div>
+    <>
+      <SEOHead
+        title="ANKH Legal | Av. Arb. Yağmur Koçak Arat | Kurumsal Hukuk & Arabuluculuk"
+        description="ANKH Legal, kurumsal hukuk, gayrimenkul, uluslararası uyuşmazlıklar ve arabuluculuk alanlarında stratejik hukuki danışmanlık hizmeti sunmaktadır. Av. Arb. Yağmur Koçak Arat öncülüğünde profesyonel çözümler."
+        keywords="avukat, hukuk bürosu, kurumsal hukuk, arabulucu, gayrimenkul hukuku, İstanbul avukat, ticaret hukuku, iş hukuku, aile hukuku, miras hukuku"
+        lang="tr"
+        canonicalUrl={window.location.origin}
+      />
+      <div className="font-sans antialiased">
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Expertise />
+          <Founder />
+          <KnowledgeCenter />
+          <Contact />
+        </main>
+        <Footer />
+        <WhatsAppButton />
+      </div>
+    </>
   );
 }
 
