@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
@@ -27,7 +27,7 @@ const info = [
   },
 ];
 
-export default function Contact() {
+function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -154,3 +154,5 @@ export default function Contact() {
     </section>
   );
 }
+
+export default memo(Contact);

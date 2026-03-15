@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useRef, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Landmark, Building2, Globe2, Briefcase, Heart, Shield, UserCheck, Handshake, Scale, ListChecks, Target } from 'lucide-react';
+import { Landmark, Building2, Globe as Globe2, Briefcase, Heart, Shield, UserCheck, Handshake, Scale, ListChecks, Target } from 'lucide-react';
 
 const goldTriangle = [
   {
@@ -82,7 +82,7 @@ const arabuluculukSections = [
   },
 ];
 
-export default function Expertise() {
+function Expertise() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -254,3 +254,5 @@ export default function Expertise() {
     </>
   );
 }
+
+export default memo(Expertise);

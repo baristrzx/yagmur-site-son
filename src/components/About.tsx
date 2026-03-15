@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Globe, BarChart3, ShieldCheck } from 'lucide-react';
 
@@ -30,7 +30,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
-export default function About() {
+function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -110,3 +110,5 @@ export default function About() {
     </section>
   );
 }
+
+export default memo(About);

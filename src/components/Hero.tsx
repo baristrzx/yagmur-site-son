@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 
-export default function Hero() {
+function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-navy-800">
       <div
@@ -90,3 +91,5 @@ export default function Hero() {
     </section>
   );
 }
+
+export default memo(Hero);

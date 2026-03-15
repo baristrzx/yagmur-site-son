@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { supabase, type LegalPage } from '../lib/supabase';
 
 const quickLinks = [
@@ -10,7 +10,7 @@ const quickLinks = [
   { label: 'İletişim', href: '/#contact' },
 ];
 
-export default function Footer() {
+function Footer() {
   const [legalPages, setLegalPages] = useState<LegalPage[]>([]);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ export default function Footer() {
                 src="/image.png"
                 alt="ANKH Legal"
                 className="h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
+                loading="lazy"
               />
             </a>
           </div>
@@ -86,3 +87,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default memo(Footer);

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -8,12 +9,13 @@ import KnowledgeCenter from './components/KnowledgeCenter';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-import AdminLoginPage from './components/admin/AdminLoginPage';
-import AdminDashboard from './components/admin/AdminDashboard';
-import ClientLoginPage from './components/portal/ClientLoginPage';
-import ClientDashboard from './components/portal/ClientDashboard';
-import BlogDetailPage from './components/BlogDetailPage';
-import LegalPage from './components/LegalPage';
+
+const AdminLoginPage = lazy(() => import('./components/admin/AdminLoginPage'));
+const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard'));
+const ClientLoginPage = lazy(() => import('./components/portal/ClientLoginPage'));
+const ClientDashboard = lazy(() => import('./components/portal/ClientDashboard'));
+const BlogDetailPage = lazy(() => import('./components/BlogDetailPage'));
+const LegalPage = lazy(() => import('./components/LegalPage'));
 
 function Spinner() {
   return (
@@ -36,27 +38,27 @@ function AppContent() {
   if (loading) return <Spinner />;
 
   if (isAdminPath) {
-    if (!user) return <AdminLoginPage />;
+    if (!user) return <Suspense fallback={<Spinner />}><AdminLoginPage /></Suspense>;
     if (!profile) return <Spinner />;
-    if (profile.role !== 'admin') return <AdminLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." />;
-    return <AdminDashboard />;
+    if (profile.role !== 'admin') return <Suspense fallback={<Spinner />}><AdminLoginPage unauthorizedMessage="Bu panele erişim yetkiniz bulunmuyor." /></Suspense>;
+    return <Suspense fallback={<Spinner />}><AdminDashboard /></Suspense>;
   }
 
   if (isClientPath) {
-    if (!user) return <ClientLoginPage />;
+    if (!user) return <Suspense fallback={<Spinner />}><ClientLoginPage /></Suspense>;
     if (!profile) return <Spinner />;
-    if (profile.role !== 'client') return <ClientLoginPage />;
-    return <ClientDashboard />;
+    if (profile.role !== 'client') return <Suspense fallback={<Spinner />}><ClientLoginPage /></Suspense>;
+    return <Suspense fallback={<Spinner />}><ClientDashboard /></Suspense>;
   }
 
   if (isBlogPath) {
     const slug = path.split('/blog/')[1];
-    return <BlogDetailPage slug={slug} />;
+    return <Suspense fallback={<Spinner />}><BlogDetailPage slug={slug} /></Suspense>;
   }
 
   if (isLegalPath) {
     const slug = path.substring(1);
-    return <LegalPage slug={slug} />;
+    return <Suspense fallback={<Spinner />}><LegalPage slug={slug} /></Suspense>;
   }
 
   return (

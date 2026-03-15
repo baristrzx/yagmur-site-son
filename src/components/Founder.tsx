@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { BookOpen, Scale } from 'lucide-react';
 
@@ -7,7 +7,7 @@ const credentials = [
   { icon: BookOpen, label: 'Hukuki Danışmanlık & Risk Analizi' },
 ];
 
-export default function Founder() {
+function Founder() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -37,6 +37,7 @@ export default function Founder() {
                   src="/WhatsApp_Image_2026-02-26_at_14.25.27.jpeg"
                   alt="Av. Arb. Yağmur Koçak Arat"
                   className="w-full h-auto object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
@@ -95,3 +96,5 @@ export default function Founder() {
     </section>
   );
 }
+
+export default memo(Founder);

@@ -1,11 +1,11 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { BookOpen, ArrowRight, Calendar, Tag } from 'lucide-react';
 import { supabase, type BlogPost, type BlogCategory } from '../lib/supabase';
 
 type PostWithCategory = BlogPost & { blog_categories: BlogCategory | null };
 
-export default function KnowledgeCenter() {
+function KnowledgeCenter() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
   const [posts, setPosts] = useState<PostWithCategory[]>([]);
@@ -82,6 +82,7 @@ export default function KnowledgeCenter() {
                       src={post.cover_image}
                       alt={post.title_tr}
                       className="w-full h-full object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-navy-900/60 via-transparent to-transparent" />
                     {post.blog_categories && (
@@ -152,3 +153,5 @@ export default function KnowledgeCenter() {
     </section>
   );
 }
+
+export default memo(KnowledgeCenter);
