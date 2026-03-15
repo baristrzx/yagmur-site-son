@@ -17,8 +17,8 @@ const info = [
   {
     icon: Mail,
     label: 'E-posta',
-    value: 'info@ankhlegal.com',
-    href: 'mailto:info@ankhlegal.com',
+    value: 'info@ankhlegal.com.tr',
+    href: 'mailto:info@ankhlegal.com.tr',
   },
   {
     icon: Clock,
