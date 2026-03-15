@@ -77,38 +77,43 @@ export default function AdminLoginPage({ unauthorizedMessage }: AdminLoginPagePr
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-white/40 text-[10px] uppercase tracking-widest mb-2">
+              <label htmlFor="admin-email" className="block text-white/40 text-[10px] uppercase tracking-widest mb-2">
                 E-posta
               </label>
               <input
+                id="admin-email"
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="w-full bg-navy-800/60 border border-navy-700/60 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 focus:outline-none focus:border-gold-500/40 focus:ring-1 focus:ring-gold-500/15 transition-all"
+                className="w-full bg-navy-800/60 border border-navy-700/60 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 focus:outline-none focus:border-gold-500/40 focus:ring-2 focus:ring-gold-500/30 transition-all"
                 placeholder="admin@ankhlegal.com"
+                aria-label="E-posta adresi"
               />
             </div>
 
             <div>
-              <label className="block text-white/40 text-[10px] uppercase tracking-widest mb-2">
+              <label htmlFor="admin-password" className="block text-white/40 text-[10px] uppercase tracking-widest mb-2">
                 Şifre
               </label>
               <div className="relative">
                 <input
+                  id="admin-password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   required
                   autoComplete="current-password"
-                  className="w-full bg-navy-800/60 border border-navy-700/60 rounded-xl px-4 py-3 pr-12 text-white text-sm placeholder-white/20 focus:outline-none focus:border-gold-500/40 focus:ring-1 focus:ring-gold-500/15 transition-all"
+                  className="w-full bg-navy-800/60 border border-navy-700/60 rounded-xl px-4 py-3 pr-12 text-white text-sm placeholder-white/20 focus:outline-none focus:border-gold-500/40 focus:ring-2 focus:ring-gold-500/30 transition-all"
                   placeholder="••••••••"
+                  aria-label="Şifre"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/50 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/50 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500/30 rounded-lg p-1"
+                  aria-label={showPassword ? 'Şifreyi gizle' : 'Şifreyi göster'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>

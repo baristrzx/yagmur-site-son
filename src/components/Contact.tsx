@@ -65,11 +65,11 @@ function Contact() {
                   <item.icon size={19} className="text-gold-400" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 font-sans font-medium uppercase tracking-wider mb-1">{item.label}</p>
+                  <p className="text-xs text-gray-500 font-sans font-medium uppercase tracking-wider mb-1">{item.label}</p>
                   {item.href ? (
                     <a
                       href={item.href}
-                      className="text-navy-800 font-semibold font-sans hover:text-gold-600 transition-colors whitespace-pre-line"
+                      className="text-navy-800 font-semibold font-sans hover:text-gold-600 transition-colors whitespace-pre-line focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded"
                     >
                       {item.value}
                     </a>
@@ -92,7 +92,8 @@ function Contact() {
                 href="https://maps.app.goo.gl/Cp77Y56HyycVvpJWA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full h-full"
+                className="block w-full h-full focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-inset"
+                aria-label="Google Maps'te ANKH Legal ofis konumunu görüntüle"
               >
                 <img
                   src={`https://maps.googleapis.com/maps/api/staticmap?center=36.6553,29.1228&zoom=16&size=800x400&maptype=roadmap&markers=color:red%7C36.6553,29.1228&style=feature:all|element:labels.text.fill|color:0x4a5568&style=feature:road|element:geometry|color:0xffffff&style=feature:water|element:geometry|color:0xc8d7e8&style=feature:landscape|element:geometry|color:0xf5f5f0`}
@@ -142,7 +143,8 @@ function Contact() {
                 href="https://maps.app.goo.gl/Cp77Y56HyycVvpJWA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-gold-400 hover:text-gold-300 text-xs font-semibold font-sans transition-colors"
+                className="inline-flex items-center gap-1.5 text-gold-400 hover:text-gold-300 text-xs font-semibold font-sans transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
+                aria-label="Google Maps'te büyük haritayı aç"
               >
                 <MapPin size={12} />
                 Büyük Harita

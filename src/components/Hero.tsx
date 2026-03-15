@@ -45,7 +45,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="font-sans text-white/70 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0"
+          className="font-sans text-white/85 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0"
         >
           Karmaşık hukuki süreçlerde, bireyler ve şirketler için dava yönetimi,
           hukuki danışmanlık ve stratejik temsil.
@@ -61,13 +61,13 @@ function Hero() {
             href="https://wa.me/905059895759"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 bg-gold-500 hover:bg-gold-400 text-navy-800 font-semibold text-sm tracking-wide rounded transition-all duration-200 hover:shadow-lg hover:shadow-gold-500/30 hover:-translate-y-0.5 text-center"
+            className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 bg-gold-500 hover:bg-gold-400 text-navy-900 font-semibold text-sm tracking-wide rounded transition-all duration-200 hover:shadow-lg hover:shadow-gold-500/30 hover:-translate-y-0.5 text-center focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-800"
           >
             Ön Görüşme Talep Et
           </a>
           <a
             href="#stratejik-yaklasim"
-            className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 border border-white/30 hover:border-white/60 text-white text-sm font-medium tracking-wide rounded transition-all duration-200 hover:bg-white/5 text-center"
+            className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 border border-white/30 hover:border-white/60 text-white text-sm font-medium tracking-wide rounded transition-all duration-200 hover:bg-white/5 text-center focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-navy-800"
           >
             Daha Fazla Bilgi
           </a>
@@ -82,7 +82,8 @@ function Hero() {
       >
         <a
           href="#stratejik-yaklasim"
-          className="flex flex-col items-center gap-2 text-white/40 hover:text-white/70 transition-colors group"
+          className="flex flex-col items-center gap-2 text-white/60 hover:text-white/90 transition-colors group focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2"
+          aria-label="Aşağı kaydır"
         >
           <span className="text-xs font-sans tracking-widest uppercase">Keşfedin</span>
           <ArrowDown size={16} className="animate-bounce" />

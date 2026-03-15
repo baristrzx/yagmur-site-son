@@ -57,38 +57,43 @@ export default function ClientLoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-white/50 text-xs uppercase tracking-widest mb-2">
+              <label htmlFor="client-email" className="block text-white/50 text-xs uppercase tracking-widest mb-2">
                 E-posta Adresi
               </label>
               <input
+                id="client-email"
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="w-full bg-navy-900/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/25 focus:outline-none focus:border-gold-500/50 focus:ring-1 focus:ring-gold-500/20 transition-all text-sm"
+                className="w-full bg-navy-900/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/25 focus:outline-none focus:border-gold-500/50 focus:ring-2 focus:ring-gold-500/30 transition-all text-sm"
                 placeholder="ornek@email.com"
+                aria-label="E-posta adresi"
               />
             </div>
 
             <div>
-              <label className="block text-white/50 text-xs uppercase tracking-widest mb-2">
+              <label htmlFor="client-password" className="block text-white/50 text-xs uppercase tracking-widest mb-2">
                 Şifre
               </label>
               <div className="relative">
                 <input
+                  id="client-password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   required
                   autoComplete="current-password"
-                  className="w-full bg-navy-900/60 border border-white/10 rounded-xl px-4 py-3 pr-12 text-white placeholder-white/25 focus:outline-none focus:border-gold-500/50 focus:ring-1 focus:ring-gold-500/20 transition-all text-sm"
+                  className="w-full bg-navy-900/60 border border-white/10 rounded-xl px-4 py-3 pr-12 text-white placeholder-white/25 focus:outline-none focus:border-gold-500/50 focus:ring-2 focus:ring-gold-500/30 transition-all text-sm"
                   placeholder="••••••••"
+                  aria-label="Şifre"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500/30 rounded-lg p-1"
+                  aria-label={showPassword ? 'Şifreyi gizle' : 'Şifreyi göster'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>

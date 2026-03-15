@@ -59,7 +59,10 @@ export default function Navbar() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+              className="flex items-center gap-1 text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
+              aria-expanded={dropdownOpen}
+              aria-haspopup="true"
+              aria-label="Uzmanlıklar menüsü"
             >
               Uzmanlıklar
               <ChevronDown
@@ -101,7 +104,7 @@ export default function Navbar() {
 
           <a
             href="#arabuluculuk"
-            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
           >
             Arabuluculuk
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
@@ -109,7 +112,7 @@ export default function Navbar() {
 
           <a
             href="#knowledge"
-            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
           >
             Bilgi Merkezi
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
@@ -117,7 +120,7 @@ export default function Navbar() {
 
           <a
             href="#founder"
-            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
           >
             Kurucu
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
@@ -125,7 +128,7 @@ export default function Navbar() {
 
           <a
             href="#contact"
-            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+            className="text-white/80 hover:text-gold-400 text-sm font-medium tracking-wide transition-colors duration-200 relative group focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
           >
             İletişim
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
@@ -133,7 +136,7 @@ export default function Navbar() {
 
           <a
             href="/client-panel"
-            className="text-white/60 hover:text-white/90 text-sm font-medium tracking-wide transition-colors duration-200 border border-white/20 hover:border-white/40 px-4 py-1.5 rounded whitespace-nowrap"
+            className="text-white/60 hover:text-white/90 text-sm font-medium tracking-wide transition-colors duration-200 border border-white/20 hover:border-white/40 px-4 py-1.5 rounded whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-gold-500/50"
           >
             Müvekkil Paneli
           </a>
@@ -141,8 +144,9 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white p-2 -mr-1 rounded-lg hover:bg-white/10 transition-colors"
-          aria-label="Toggle menu"
+          className="md:hidden text-white p-2 -mr-1 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500/50"
+          aria-label={menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+          aria-expanded={menuOpen}
         >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>

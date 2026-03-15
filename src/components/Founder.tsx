@@ -86,7 +86,7 @@ function Founder() {
 
           <a
             href="#contact"
-            className="inline-flex items-center mt-8 px-7 py-3.5 bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold tracking-wide rounded transition-all duration-200 hover:shadow-lg hover:shadow-navy-800/30 hover:-translate-y-0.5"
+            className="inline-flex items-center mt-8 px-7 py-3.5 bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold tracking-wide rounded transition-all duration-200 hover:shadow-lg hover:shadow-navy-800/30 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:ring-offset-2"
           >
             Dosya Ön Değerlendirme Talebi
             <span className="ml-2">→</span>

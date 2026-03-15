@@ -48,7 +48,7 @@ function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-white/60 hover:text-gold-400 text-sm font-sans transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-white/70 hover:text-gold-400 text-sm font-sans transition-colors duration-200 flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
                   >
                     <span className="w-3 h-px bg-gold-500/40 group-hover:w-5 group-hover:bg-gold-400 transition-all duration-200" />
                     {link.label}
@@ -67,7 +67,7 @@ function Footer() {
                 <li key={page.id}>
                   <a
                     href={`/${page.slug}`}
-                    className="text-white/60 hover:text-gold-400 text-sm font-sans transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-white/70 hover:text-gold-400 text-sm font-sans transition-colors duration-200 flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-gold-500/50 rounded px-1 py-0.5"
                   >
                     <span className="w-3 h-px bg-gold-500/40 group-hover:w-5 group-hover:bg-gold-400 transition-all duration-200" />
                     {page.title_tr}
@@ -79,7 +79,7 @@ function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 text-center">
-          <p className="text-white/30 text-xs font-sans">
+          <p className="text-white/50 text-xs font-sans">
             © {new Date().getFullYear()} ANKH Legal. Tüm hakları saklıdır.
           </p>
         </div>
